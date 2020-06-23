@@ -1,4 +1,3 @@
-
 // api
 import tmdb from '../api/tmdb';
 
@@ -7,8 +6,7 @@ const mainItemTitle = document.querySelector('.main-item-title');
 const visualWrapper = document.querySelector('.visual-wrapper');
 const visualDetails = document.querySelector('.visual-details');
 const mainItemBrief = visualDetails.querySelector('.main-item-brief');
-const maturityRating = visualDetails.querySelector('.maturity-rating');
-const linkWrapper = visualDetails.querySelector('.link-wrapper');
+const infoMoreBtn = document.querySelector('.infoMore-btn');
 
 // stats
 let content;
@@ -54,8 +52,8 @@ async function render() {
   url(${contentImage[0]})`;
 }
 
-function init() {
-  render();
+async function init() {
+  await render();
 }
 
 init();

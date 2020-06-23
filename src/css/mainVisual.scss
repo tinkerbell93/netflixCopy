@@ -6,6 +6,9 @@
 .main-item-title{
   font-size: 100px;
   padding: 20px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .visual-details{
