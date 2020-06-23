@@ -29,15 +29,23 @@ async function getContentImage() {
   let imageUrl = await tmdb().backdropImage([content]);
   return imageUrl;
 }
-
 async function render() {
   // state set
   content = await getMainContent();
   contentTitle = content.title ? content.title : content.name;
+
   contentBrief = content.overview;
-  contentImage = await getContentImage();
-  console.log(contentImage[0]);
+  let temp = contentBrief.split(' ');
   console.log(content);
+  if (temp.length > 30) {
+    temp = contentBrief.split('.');
+    contentBrief = temp[0] + '.';
+  }
+
+  if (content.adult !== undefined || content.adult !== false)
+    document.querySelector('.maturity-rating').style.opacity = 0;
+
+  contentImage = await getContentImage();
 
   // DOM change
   mainItemTitle.textContent = contentTitle;

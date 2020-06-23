@@ -1,6 +1,6 @@
 export default function tmdbApi() {
-  // const LANGUAGE = '&language=ko-kr';
-  const LANGUAGE = '';
+  const LANGUAGE = '&language=ko-kr';
+  // const LANGUAGE = '';
   const BASEURL = 'https://api.themoviedb.org/3';
   const IMAGEURL = 'https://image.tmdb.org/t/p';
   const APIKEY = 'api_key=250ed9163433644ad57f1350029b12e8';
