@@ -36,7 +36,6 @@ async function render() {
 
   contentBrief = content.overview;
   let temp = contentBrief.split(' ');
-  console.log(content);
   if (temp.length > 30) {
     temp = contentBrief.split('.');
     contentBrief = temp[0] + '.';
