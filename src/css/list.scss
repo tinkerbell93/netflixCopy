@@ -1,0 +1,80 @@
+// 리스트 레이아웃
+main {
+  width: 90vw;
+  margin: 0 auto;
+}
+
+// 리스트 헤딩
+.main-tvShow-heading button{
+  color: #fff;
+}
+
+// 리스트 아이템
+.item-wrapper > ul {
+  display: flex;
+}
+.item-wrapper li {
+  position: relative;
+}
+.bob-container{
+  // width: 80%;
+  transform: scale(0.8);
+  transition: all .3s;
+}
+.bob-container > img {
+  width: 100%;
+}
+.bob-container div,
+.bob-container .detail-btn {
+  visibility: hidden;
+}
+.bob-container:hover div,
+.bob-container:hover .detail-btn {
+  visibility: visible;
+}
+.bob-container:hover {
+  // width: 100%;
+  transform: scale(1);
+}
+
+// 리스트 아이템 버튼 
+.bob-container button {
+  padding: 5px;
+  border-radius: 50%;
+}
+
+// 리스트 아이템 왼쪽 영역
+.bob-overview-wapper {
+  position: absolute;
+  left: 10px;
+  bottom: 30px;
+}
+.bob-container .play-btn {
+  width: 27px;
+  height: 27px;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+// 리스트 아이템 오른쪽 영역
+.bob-actions-wrapper {
+  position: absolute;
+  right: 10px;
+  bottom: 30px;
+}
+.thumbs-wrapper button {
+  display: block;
+  width: 23px;
+  height: 23px;
+  border: 1px solid #fff;
+}
+
+// 리스트 아이템 상세정보 버튼
+.bob-container .detail-btn {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background-color: red;
+  border-radius: 0;
+}
