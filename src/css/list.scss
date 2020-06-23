@@ -5,13 +5,15 @@ main {
 }
 
 // 리스트 헤딩
-.main-tvShow-heading button{
+main h3 button{
   color: #fff;
+  outline: 0;
 }
+
 
 // 리스트 아이템
 .item-wrapper > ul {
-  display: flex;
+  // display: flex;
 }
 .item-wrapper li {
   position: relative;
@@ -26,7 +28,7 @@ main {
 }
 .bob-container div,
 .bob-container .detail-btn {
-  visibility: hidden;
+  // visibility: hidden;
 }
 .bob-container:hover div,
 .bob-container:hover .detail-btn {
