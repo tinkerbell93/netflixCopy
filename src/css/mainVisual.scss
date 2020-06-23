@@ -1,0 +1,42 @@
+.main-visual{
+  width: 90vw;
+  margin: 100px auto;
+  height: 370px;
+}
+.main-item-title{
+  font-size: 100px;
+  padding: 20px 0;
+}
+.visual-details{
+  .main-item-brief{
+    word-break: keep-all;
+    width: 710px;
+    font-size: 26px;
+  }
+  .maturity-rating{
+    position: absolute;
+    right: 5vw;
+    top: 545px;
+    font-size: 26px;
+    &::before{
+      content: "";
+      position: absolute;
+      background: gray;
+    }
+  }
+
+}
+.link-wrapper{
+  display: flex;
+}
+.visual-wrapper{
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 70px, rgba(20, 20, 20, 1) 90vh),
+              url("../img/image.jpg") no-repeat;
+  background-size: 100%;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}

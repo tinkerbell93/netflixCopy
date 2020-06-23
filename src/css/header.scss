@@ -1,0 +1,40 @@
+.header{
+  width: 90vw;
+  height: 70px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.logo{
+  font-size: 0;
+  img{
+    width: 100px;
+  }
+  margin-right: 20px;
+}
+.logo::before{
+  content: '';
+  width: 100px;
+}
+
+.navigation-list{
+  display: flex;
+  vertical-align: center;
+  li{
+    margin-left: 20px;
+  }
+}
+.searchForm{
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  #contentSearch{
+    height: 34px;
+    width: 250px;
+    display: block;
+    border: 1px solid white;
+    background: rgba(20, 20, 20, 0.8);
+    border-radius: 0;
+    padding-left: 10px;
+  }
+}
