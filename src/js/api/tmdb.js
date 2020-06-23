@@ -5,7 +5,6 @@ export default function tmdbApi() {
   const IMAGEURL = 'https://image.tmdb.org/t/p';
   const APIKEY = 'api_key=250ed9163433644ad57f1350029b12e8';
   const REGION = '&region=kr';
-  const WIDTH = 500;
 
   const MOVIE = 'movie';
   const TV = 'tv';

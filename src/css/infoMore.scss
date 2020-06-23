@@ -46,3 +46,15 @@
 .list-items{
   display: flex;
 }
+.list-items{
+  li{
+    margin-left: 10px;
+    &:not(:last-of-type)::after{
+      content: ',';
+    }
+  }
+}
+.infoMore-nav-btn{
+  color: white;
+
+}

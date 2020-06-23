@@ -8,7 +8,7 @@ body{
     box-sizing: border-box;
   }
 }
-h1,h2,h3{
+h1,h2,h3,h4{
   margin: 0;
 }
 ul{
@@ -16,6 +16,7 @@ ul{
   margin: 0;
   li{
     list-style: none;
+    color: inherit;
   }
 }
 a{
