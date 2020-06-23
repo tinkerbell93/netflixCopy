@@ -1,17 +1,20 @@
 .main-visual{
   width: 90vw;
   margin: 100px auto;
-  height: 370px;
+  height: 400px;
 }
 .main-item-title{
   font-size: 100px;
   padding: 20px 0;
 }
+
 .visual-details{
   .main-item-brief{
     word-break: keep-all;
-    width: 710px;
+    width: 800px;
+    overflow: hidden;
     font-size: 26px;
+    max-height: 175px;
   }
   .maturity-rating{
     position: absolute;
@@ -28,6 +31,7 @@
 }
 .link-wrapper{
   display: flex;
+  margin-bottom: 10px;
 }
 .visual-wrapper{
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 70px, rgba(20, 20, 20, 1) 90vh),
