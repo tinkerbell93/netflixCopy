@@ -1,6 +1,9 @@
 // api
 import tmdb from '../api/tmdb'
 
+// 전부
+const test = document.querySelector('.test')
+const test1 = document.querySelector('.test1')
 // 찜 목록 이동
 const myList = document.querySelector('.myList')
 // visualDetails DOMs
@@ -173,7 +176,35 @@ function addList (e) {
 }
 
 async function searchList (e) {
-  console.log(JSON.parse(localStorage.getItem('itemList')))
+  let getItems = await JSON.parse(localStorage.getItem('itemList'))
+  let searchList = [];
+  // await getItems.forEach(async getItem => {
+  //   if('moive' in getItem){
+  //     // console.log(getItem.moive);
+  //     await tmdb().detailMovie(getItem.moive)
+  //   }else{
+  //     // console.log(getItem.tv);
+  //     await tmdb().detailTv(getItem.tv)
+  //   }
+  // })
+  
+  for (const item of getItems) {
+    if('moive' in item){
+      // console.log(getItem.moive);
+      searchList.push(await tmdb().detailMovie(item.moive))
+    }else{
+      // console.log(getItem.tv);
+      searchList.push(await tmdb().detailTv(item.tv))
+    }
+  }
+
+  console.log(searchList);
+  
+
+  test.style.display = 'none'
+  test1.style.height ='1000px'
+
+
 }
 
 async function init () {
