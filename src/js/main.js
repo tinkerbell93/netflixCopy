@@ -5,4 +5,6 @@ const css = require('../css/app.scss');
 
 // 황태현
 const mainvis = require('./visual/render.js');
-const info = require('./info/render.js');
+
+// LIST
+const list = require('./list/render.js');

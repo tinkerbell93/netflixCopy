@@ -61,7 +61,6 @@ export default function tmdbApi () {
     let imageList = lists.map(list => `${IMAGEURL}/w${WIDTH}${list}`)
     return imageList
   }
-
   // 검색
   async function searchAll (query = '') {
     let fullUrl = `${BASEURL}/search/multi?${APIKEY}${LANGUAGE}&query=${query}&page=1&include_adult=false${REGION}`
@@ -75,7 +74,6 @@ export default function tmdbApi () {
     epLists = await getEpList.json().then(list => list.episodes)
     return epLists
   }
-
   // 비슷한 목록
   async function getSmilarList (kind, id) {
     let fullUrl = `${BASEURL}/${kind}/${id}/similar?${APIKEY}${LANGUAGE}&page=1`
@@ -140,7 +138,27 @@ export default function tmdbApi () {
     tvCast = await getCast.json().then(list => list)
     return tvCast
   }
-
+  // 종류
+  async function getGnere () {
+    let fullUrl = `${BASEURL}/genre/${MOVIE}/list?${APIKEY}${LANGUAGE}`
+    let getList = await fetch(fullUrl)
+    let getGnere = []
+    let temp = []
+    getGnere = await getList.json().then(list => list.genres)
+    fullUrl = `${BASEURL}/genre/${TV}/list?${APIKEY}${LANGUAGE}`
+    getList = await fetch(fullUrl)
+    temp = await getList.json().then(list => list.genres)
+    getGnere = [...getGnere, ...temp]
+    getGnere = getGnere.filter((thing, index) => {
+      return (
+        index ===
+        getGnere.findIndex(obj => {
+          return JSON.stringify(obj) === JSON.stringify(thing)
+        })
+      )
+    })
+    return getGnere
+  }
   return {
     popularTv,
     popularMovie,
