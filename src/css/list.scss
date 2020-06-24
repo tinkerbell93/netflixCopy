@@ -5,6 +5,7 @@ main {
 }
 main > section {
   overflow: hidden;
+  position: relative;
 }
 // 리스트 헤딩
 main h3 button{
@@ -91,4 +92,21 @@ main h3 button{
   height: 2px;
   background-color: red;
   border-radius: 0;
+}
+
+// 슬라이드
+// 버튼
+.controls button {
+  position: absolute;
+  top: 0;
+  width: 30px;
+  height: 100px;
+  color: #fff;
+  background-color: #ddd;
+}
+.controls .prev-btn {
+  left: 0;
+}
+.controls .next-btn {
+  right: 0;
 }
