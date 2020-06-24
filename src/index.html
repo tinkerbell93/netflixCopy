@@ -6,7 +6,7 @@
   <meta name="viewport"
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="/src/fontello-d9d38057/css/fontello-embedded.css">
+  <link rel="stylesheet" href="./fontello-d9d38057/css/fontello-embedded.css">
   <script defer src="../dist/js/bundle.js"></script>
   <title>Netflix</title>
 </head>
@@ -19,7 +19,7 @@
         <img src="../src/img/Netflix_Logo_RGB.png" alt="Netflix">
       </a>
     </h1>
-    <Nav class="navigation">
+    <nav class="navigation">
       <ul class="navigation-list">
         <li class="home"><a href="#">홈</a></li>
         <li class="tvShows"><a href="#">TV 프로그램</a></li>
@@ -27,15 +27,15 @@
         <li class="latest"><a href="#">최신 콘텐츠</a></li>
         <li class="myList"><a href="#">내가 찜한 콘텐츠</a></li>
       </ul>
-    </Nav>
+    </nav>
     <div class="search-form-container">
       <button type="button" class="reset-btn icon-search"></button>
       <form action="#" method="POST" class="search-form">
         <fieldset class="reset-box search-box">
-					<legend>검색</legend>
-					<label for="content-search"></label>
-					<input id="content-search" type="search" placeholder="Titles, people, genres" name="search">
-				</fieldset>
+          <legend>검색</legend>
+          <label for="content-search"></label>
+          <input id="content-search" type="search" placeholder="Titles, people, genres" name="search">
+        </fieldset>
       </form>
     </div>
   </header>
@@ -95,91 +95,82 @@
       </div>
     </section>
   </section>
+  
+<!--인포-->
+<section class="infoMore">
+  <div class="info-wrap">
+    <div class="main-navigation">
+      <ul>
+        <li class="overview active">
+          <div class="infoMore-main">
+            <div class="infoMore-main-info">
+              <h3 class="info-title">
+                사이코지만 괜찮아
+              </h3>
+              <!-- CSS backg round 프로퍼티에 그래디언트+ 가상요소 배경이미지 삽입-->
+              <div class="infoMore-BG"></div>
+              <!-- like, dislike section : 해당 콘텐츠 버튼 클릭시 나타남 -->
+              <!-- <div class="thumbs-wrapper">
+              <div class="thumb-down icon-thumbs-down">
 
-  <!--인포-->
-  <section class="infoMore">
-    <div class="info-wrap">
-      <div class="main-navigation">
-        <ul>
-          <li class="overview">
-            <button type="button" class="inofMore-nav-btn active">콘텐츠 정보</button>
-
-            <div class="infoMore-main">
-              <div class="infoMore-main-info">
-                <h3 class="info-title">
-                  사이코지만 괜찮아
-                </h3>
-                <!--CSS background 프로퍼티에 그래디언트+ 가상요소 배경이미지 삽입-->
-                <div class="infoMore-BG"></div>
-                <!-- like, dislike section : 해당 콘텐츠 버튼 클릭시 나타남 -->
-                <!-- <div class="thumbs-wrapper">
-				<div class="thumb-down icon-thumbs-down">				
-				</div>
-				<div class="thumb-up icon-thumbs-up">			
-				</div>
-			  </div> -->
-                <ul class="content-info">
-                  <li class="yaer">2020</li>
-                  <li class="maturity-rating">15+</li>
-                  <li class="duration">시즌 1</li>
+              </div>
+              <div class="thumb-up icon-thumbs-up">
+              </div>
+            </div> -->
+              <ul class="content-info">
+                <li class="yaer">2020</li>
+                <li class="maturity-rating">15+</li>
+                <li class="duration">시즌 1</li>
+              </ul>
+              <p class="synopsis">
+                사랑따위, 못 느끼면 어때. 태어날 때부터 온기가 없는 동화작가.
+                그녀가 사랑을 외면하는 정신 병동 보호사와 마주친다.
+                이상하지만 꽤 괜찮은, 힐링 로맨틱 코미디.
+              </p>
+            </div>
+            <div class="link-wrapper">
+              <button type="button" class="play-btn icon-play">
+                <span>재생</span>
+              </button>
+              <button type="button" class="addList-btn gray-btn icon-plus">
+                <span>내가 찜한 콘텐츠</span>
+              </button>
+            </div>
+            <div class="thumbs-wrapper">
+              <button type="button" class="like-btn icon-thumbs-up">
+                <span class="a11y-hidden">좋아요</span>
+              </button>
+              <button type="button" class="dislike-btn icon-thumbs-down">
+                <span class="a11y-hidden">싫어요</span>
+              </button>
+            </div>
+            <div class="meta-lists">
+              <div class="cast inline-list">
+                <h4 class="list-label">주연</h4>:
+                <ul class="list-items">
+                  <li>김수현</li>
+                  <li>서예지</li>
+                  <li>오정세</li>
                 </ul>
-                <p class="synopsis">
-                  사랑따위, 못 느끼면 어때. 태어날 때부터 온기가 없는 동화작가.
-                  그녀가 사랑을 외면하는 정신 병동 보호사와 마주친다.
-                  이상하지만 꽤 괜찮은, 힐링 로맨틱 코미디.
-                </p>
               </div>
-              <div class="link-wrapper">
-                <button type="button" class="play-btn icon-play">                 
-                  <span>재생</span>
-                </button>
-                <button type="button" class="addList-btn gray-btn icon-plus">                
-                  <span>내가 찜한 콘텐츠</span>
-                </button>
+              <div class="genres inline-list">
+                <h4 class="list-label">장르</h4>:
+                <ul class="list-items">
+                  <li>로맨틱 TV 드라마</li>
+                  <li>로맨틱 TV 코미디</li>
+                  <li>한국 드라마</li>
+                </ul>
               </div>
-              <div class="thumbs-wrapper">
-                <button type="button" class="like-btn icon-thumbs-up">                 
-                  <span class="a11y-hidden">좋아요</span>
-                </button>
-                <button type="button" class="dislike-btn icon-thumbs-down">                 
-                  <span class="a11y-hidden">싫어요</span>
-                </button>
-              </div>
-              <div class="meta-lists">
-                <div class="cast inline-list">
-                  <h4 class="list-label">주연</h4>:
-                  <ul class="list-items">
-                    <li>김수현</li>
-                    <li>서예지</li>
-                    <li>오정세</li>
-                  </ul>
-                </div>
-                <div class="genres inline-list">
-                  <h4 class="list-label">장르</h4>:
-                  <ul class="list-items">
-                    <li>로맨틱 TV 드라마</li>
-                    <li>로맨틱 TV 코미디</li>
-                    <li>한국 드라마</li>
-                  </ul>
-                </div>
-                <div class="tags inline-list">
-                  <h4 class="list-label">영화 특징</h4>:
-                  <ul class="list-items">
-                    <li>감성적</li>
-                    <li>로맨틱</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 class="list-label">출연</h4>:
-                  <ul class="list-items">
-                    <li>김수현</li>
-                    <li>서예지</li>
-                    <li>오정세</li>
-                  </ul>
-                </div>
+              <div class="tags inline-list">
+                <h4 class="list-label">영화 특징</h4>:
+                <ul class="list-items">
+                  <li>감성적</li>
+                  <li>로맨틱</li>
+                </ul>
               </div>
             </div>
-          </li>
+          </div>
+        </li>
           <li class="infoMore-nav-lists-roundInfo">
             <button type="button" class="inofMore-nav-btn">회차 정보</button>
           </li>
