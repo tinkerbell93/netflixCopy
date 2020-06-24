@@ -6,22 +6,10 @@
   padding: 30px 0;
   overflow: hidden;
   font-size: 20px;
-  display: none;
   .info-wrap{
     margin: 0 auto;
     width: 90vw;
-    .btn{
-      position: absolute; 
-      left: 50%;
-      margin-left: -200px;
-      bottom: 10%;
-      .infoMore-nav-btn{
-        color: white;
-      }
-    }
-    
   }
-  
   .info-title{
     padding: 30px 0;
     font-size: 70px;
@@ -51,7 +39,7 @@
   justify-content: space-between;
 }
 .synopsis{
-  width: 700px;
+  width: 600px;
   word-break: keep-all;
 }
 .inline-list,
