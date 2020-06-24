@@ -1,6 +1,8 @@
 // api
 import tmdb from '../api/tmdb'
 
+// 찜 목록
+const myList = document.querySelector('.myList')
 // visualDetails DOMs
 const mainVisual = document.querySelector('.main-visual')
 const mainItemTitle = document.querySelector('.main-item-title')
@@ -132,28 +134,52 @@ async function infoOverview () {
 }
 
 function addList (e) {
-  let item = localStorage.getItem('itemList')
+  let item = JSON.parse(localStorage.getItem('itemList'))
   let id = content.id
-  let temp = ''
-
-  if (ranNum < 20) {
-    temp = 'movie'
-    item = [...item, { moive: id }]
-
-    localStorage.setItem('itemList', JSON.stringify(item))
-  } else {
-    temp = 'tv'
-    item.push({ tv: id })
-    localStorage.setItem('itemList', JSON.stringify(item))
+  let test = true
+  if (item) {
+    item.forEach(i => {
+      if (ranNum < 20) {
+        if (Object.is(i.moive, content.id)) {
+          test = false
+        }
+      } else {
+        if (Object.is(i.tv, content.id)) {
+          test = false
+        }
+      }
+    })
   }
+  if (test) {
+    if (ranNum < 20) {
+      if (item) {
+        item = [...item, { moive: id }]
+      } else {
+        item = [{ moive: id }]
+      }
+      localStorage.setItem('itemList', JSON.stringify(item))
+    } else {
+      if (item) {
+        item = [...item, { tv: id }]
+      } else {
+        item = [{ tv: id }]
+      }
+      localStorage.setItem('itemList', JSON.stringify(item))
+    }
+  }
+
   item = localStorage.getItem('itemList')
-  console.log(JSON.parse(item))
+}
+
+async function searchList (e) {
+  console.log(JSON.parse(localStorage.getItem('itemList')))
 }
 
 async function init () {
   await render()
   infoMoreBtn.addEventListener('click', infoOverview)
   addListBtn.addEventListener('click', addList)
+  myList.addEventListener('click', searchList)
 }
 
 init()
