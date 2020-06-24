@@ -3,7 +3,9 @@ main {
   width: 90vw;
   margin: 0 auto;
 }
-
+main > section {
+  overflow: hidden;
+}
 // 리스트 헤딩
 main h3 button{
   color: #fff;
@@ -12,11 +14,21 @@ main h3 button{
 
 
 // 리스트 아이템
+.item-wrapper {
+  width: 6000px;
+}
 .item-wrapper > ul {
-  // display: flex;
+  display: flex;
+}
+.item-wrapper > ul::after {
+  display: block;
+  content: '';
+  clear: both;
 }
 .item-wrapper li {
   position: relative;
+  // width: 200px;
+  // float: left;
 }
 .bob-container{
   // width: 80%;
