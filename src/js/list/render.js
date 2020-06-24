@@ -1,14 +1,13 @@
 // api
-import tmdb from '../api/tmdb'
+import tmdb from '../api/tmdb';
 
 // DOMs
-const $tvShowList = document.querySelector('.main-tvShow-list ul')
-const $movieList = document.querySelector('.main-movie-list ul')
-const $rateTvShowList = document.querySelector('.rate-tvShow-list ul')
-const $popularTvShowList = document.querySelector('.popular-tvShow-list ul')
-const mainMovie = document.querySelector('.main-movie')
-const $rateMovieList = mainMovie.querySelector('.rate-Movie-list > ul')
-const $popularMovieList = document.querySelector('.popular-movie-list ul')
+const $tvShowList = document.querySelector('.main-tvShow-list ul');
+const $movieList = document.querySelector('.main-movie-list ul');
+const $rateTvShowList = document.querySelector('.rate-tvShow-list ul');
+const $popularTvShowList = document.querySelector('.popular-tvShow-list ul');
+const $rateMovieList = document.querySelector('.rate-movie-list ul');
+const $popularMovieList = document.querySelector('.popular-movie-list ul');
 
 // Genre List
 const genresList = [
@@ -120,37 +119,37 @@ const genresList = [
     id: 10768,
     name: '전쟁'
   }
-]
+];
 
 // Functions
-function getGenre (movie) {
-  const genreIds = movie.genre_ids
+function getGenre(movie) {
+  const genreIds = movie.genre_ids;
 
-  function matchGenre (id) {
-    let genreName = ''
+  function matchGenre(id) {
+    let genreName = '';
     genresList.forEach(genre => {
-      genre.id === id ? (genreName = genre.name) : ''
-    })
-    return genreName
+      genre.id === id ? genreName = genre.name : '';
+    });
+    return genreName;
   }
 
-  let nameArr = []
+  let nameArr = [];
   genreIds.forEach(id => {
-    nameArr = [...nameArr, matchGenre(id)]
-  })
+    nameArr = [...nameArr, matchGenre(id)];
+  });
 
-  return nameArr
+  return nameArr;
 }
 
 // Main TV Shows List
-async function renderMainTv () {
+async function renderMainTv() {
   // state
-  const numRandom = Math.floor(Math.random() * 10) + 1
-  const tvShowsList = await tmdb().ratedTv(numRandom)
-  const IMAGEURL = 'https://image.tmdb.org/t/p'
-  const WIDTH = 300
+  const numRandom = Math.floor(Math.random() * 10) + 1;
+  const tvShowsList = await tmdb().ratedTv(numRandom);
+  const IMAGEURL = 'https://image.tmdb.org/t/p';
+  const WIDTH = 300;
 
-  let listHtml = ''
+  let listHtml = '';
 
   tvShowsList.forEach(tvshow => {
     listHtml += `<li class="item">
@@ -165,11 +164,7 @@ async function renderMainTv () {
                       <h4 class="item-title">${tvshow.name}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${
-                            tvshow.adult
-                              ? '청소년 관람 불가'
-                              : '모든 연령 관람 가능'
-                          }
+                          ${tvshow.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
                         </li>
                         <li>
                         ${getGenre(tvshow)}
@@ -195,20 +190,20 @@ async function renderMainTv () {
                       <span class="a11y-hidden">상세 정보</span>
                     </button>
                   </div>
-                </li>`
-  })
-  $tvShowList.innerHTML = listHtml
+                </li>`;
+  });
+  $tvShowList.innerHTML = listHtml;
 }
 
 // Main Movies List
-async function renderMainMovie () {
+async function renderMainMovie() {
   // state
-  const numRandom = Math.floor(Math.random() * 10) + 1
-  const moviesList = await tmdb().ratedMovie(numRandom)
-  const IMAGEURL = 'https://image.tmdb.org/t/p'
-  const WIDTH = 300
+  const numRandom = Math.floor(Math.random() * 10) + 1;
+  const moviesList = await tmdb().ratedMovie(numRandom);
+  const IMAGEURL = 'https://image.tmdb.org/t/p';
+  const WIDTH = 300;
 
-  let listHtml = ''
+  let listHtml = '';
 
   moviesList.forEach(movie => {
     listHtml += `<li class="item">
@@ -223,11 +218,7 @@ async function renderMainMovie () {
                       <h4 class="item-title">${movie.title}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${
-                            movie.adult
-                              ? '청소년 관람 불가'
-                              : '모든 연령 관람 가능'
-                          }
+                          ${movie.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
                         </li>
                         <li>
                           ${getGenre(movie)}
@@ -253,79 +244,24 @@ async function renderMainMovie () {
                       <span class="a11y-hidden">상세 정보</span>
                     </button>
                   </div>
-                </li>`
-  })
-  $movieList.innerHTML = listHtml
+                </li>`;
+  });
+  $movieList.innerHTML = listHtml;
 }
 
 // TV shows > 순위 TV shows List
-async function renderRatedTv () {
+async function renderRatedTv() {
   // state
-  const tvShowsList = await tmdb().ratedTv()
-  const IMAGEURL = 'https://image.tmdb.org/t/p'
-  const WIDTH = 300
+  const tvShowsList = await tmdb().ratedTv();
+  const IMAGEURL = 'https://image.tmdb.org/t/p';
+  const WIDTH = 300;
 
-  let listHtml = ''
+  let listHtml = '';
 
   tvShowsList.forEach(tvshow => {
-    if (tvshow.backdrop_path) {
-      listHtml += `<li class="item">
-      <div class="bob-container">
-        <img alt="${tvshow.title}"
-        src="${IMAGEURL}/w${WIDTH}${tvshow.backdrop_path}">
-        <div class="bob-overview-wapper">
-          <button type="button" class="play-btn icon-play">                 
-            <span class="a11y-hidden">재생</span>
-          </button>
-          <!-- 콘텐츠 정보 -->
-          <h4 class="item-title">${tvshow.name}</h4>
-          <ul>
-            <li class="maturity-rating">
-              ${tvshow.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
-            </li>
-            <li>
-            ${getGenre(tvshow)}
-            </li>
-          </ul>
-        </div>
-        <div class="bob-actions-wrapper">
-          <div class="thumbs-wrapper">
-            <button type="button" class="like-btn icon-thumbs-up">                  
-              <span class="a11y-hidden">좋아요</span>
-            </button>
-            <button type="button" class="dislike-btn icon-thumbs-down">                   
-              <span class="a11y-hidden">싫어요</span>
-            </button>
-            <button type="button" class="myList-btn icon-plus">                   
-              <span class="a11y-hidden">내가 찜한 콘텐츠</span>
-            </button>
-          </div>
-        </div>
-        
-        <!-- 클릭 시 상세정보 뜸 -->
-        <button type="button" class="detail-btn">
-          <span class="a11y-hidden">상세 정보</span>
-        </button>
-      </div>
-    </li>`
-    }
-  })
-  $rateTvShowList.innerHTML = listHtml
-}
-
-// TV shows > 인기 TV shows List
-async function renderpopularTv () {
-  // state
-  const tvShowList = await tmdb().popularTv()
-  const IMAGEURL = 'https://image.tmdb.org/t/p'
-  const WIDTH = 300
-
-  let listHtml = ''
-
-  tvShowList.forEach(tvshow => {
     listHtml += `<li class="item">
                   <div class="bob-container">
-                    <img alt="${tvshow.name}"
+                    <img alt="${tvshow.title}"
                     src="${IMAGEURL}/w${WIDTH}${tvshow.backdrop_path}">
                     <div class="bob-overview-wapper">
                       <button type="button" class="play-btn icon-play">                 
@@ -335,11 +271,60 @@ async function renderpopularTv () {
                       <h4 class="item-title">${tvshow.name}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${
-                            tvshow.adult
-                              ? '청소년 관람 불가'
-                              : '모든 연령 관람 가능'
-                          }
+                          ${tvshow.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
+                        </li>
+                        <li>
+                        ${getGenre(tvshow)}
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="bob-actions-wrapper">
+                      <div class="thumbs-wrapper">
+                        <button type="button" class="like-btn icon-thumbs-up">                  
+                          <span class="a11y-hidden">좋아요</span>
+                        </button>
+                        <button type="button" class="dislike-btn icon-thumbs-down">                   
+                          <span class="a11y-hidden">싫어요</span>
+                        </button>
+                        <button type="button" class="myList-btn icon-plus">                   
+                          <span class="a11y-hidden">내가 찜한 콘텐츠</span>
+                        </button>
+                      </div>
+                    </div>
+                    
+                    <!-- 클릭 시 상세정보 뜸 -->
+                    <button type="button" class="detail-btn">
+                      <span class="a11y-hidden">상세 정보</span>
+                    </button>
+                  </div>
+                </li>`;
+  });
+  $rateTvShowList.innerHTML = listHtml;
+}
+
+// TV shows > 인기 TV shows List
+async function renderpopularTv() {
+  // state
+  const tvShowList = await tmdb().popularTv();
+  const IMAGEURL = 'https://image.tmdb.org/t/p';
+  const WIDTH = 300;
+
+  let listHtml = '';
+
+  tvShowList.forEach(tvshow => {
+    listHtml += `<li class="item">
+                  <div class="bob-container">
+                    <img alt="${tvshow.title}"
+                    src="${IMAGEURL}/w${WIDTH}${tvshow.backdrop_path}">
+                    <div class="bob-overview-wapper">
+                      <button type="button" class="play-btn icon-play">                 
+                        <span class="a11y-hidden">재생</span>
+                      </button>
+                      <!-- 콘텐츠 정보 -->
+                      <h4 class="item-title">${tvshow.title}</h4>
+                      <ul>
+                        <li class="maturity-rating">
+                          ${tvshow.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
                         </li>
                         <li>
                           ${getGenre(tvshow)}
@@ -365,19 +350,19 @@ async function renderpopularTv () {
                       <span class="a11y-hidden">상세 정보</span>
                     </button>
                   </div>
-                </li>`
-  })
-  $popularTvShowList.innerHTML = listHtml
+                </li>`;
+  });
+  $popularTvShowList.innerHTML = listHtml;
 }
 
 // Moives > 순위 Movies List
-async function renderRateMovie () {
+async function renderRateMovie() {
   // state
-  const moviesList = await tmdb().ratedMovie()
-  const IMAGEURL = 'https://image.tmdb.org/t/p'
-  const WIDTH = 300
+  const moviesList = await tmdb().ratedMovie();
+  const IMAGEURL = 'https://image.tmdb.org/t/p';
+  const WIDTH = 300;
 
-  let listHtml = ''
+  let listHtml = '';
 
   moviesList.forEach(movie => {
     listHtml += `<li class="item">
@@ -392,11 +377,7 @@ async function renderRateMovie () {
                       <h4 class="item-title">${movie.title}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${
-                            movie.adult
-                              ? '청소년 관람 불가'
-                              : '모든 연령 관람 가능'
-                          }
+                          ${movie.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
                         </li>
                         <li>
                           ${getGenre(movie)}
@@ -422,21 +403,19 @@ async function renderRateMovie () {
                       <span class="a11y-hidden">상세 정보</span>
                     </button>
                   </div>
-                </li>`
-  })
-  console.log($rateMovieList)
-
-  $rateMovieList.innerHTML = listHtml
+                </li>`;
+  });
+  $rateMovieList.innerHTML = listHtml;
 }
 
-// Moives > 인기 Movies List
-async function renderpopularMovie () {
+// Moives > 순위 Movies List
+async function renderpopularMovie() {
   // state
-  const moviesList = await tmdb().popularMovie()
-  const IMAGEURL = 'https://image.tmdb.org/t/p'
-  const WIDTH = 300
+  const moviesList = await tmdb().popularMovie();
+  const IMAGEURL = 'https://image.tmdb.org/t/p';
+  const WIDTH = 300;
 
-  let listHtml = ''
+  let listHtml = '';
 
   moviesList.forEach(movie => {
     listHtml += `<li class="item">
@@ -451,11 +430,7 @@ async function renderpopularMovie () {
                       <h4 class="item-title">${movie.title}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${
-                            movie.adult
-                              ? '청소년 관람 불가'
-                              : '모든 연령 관람 가능'
-                          }
+                          ${movie.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
                         </li>
                         <li>
                           ${getGenre(movie)}
@@ -481,23 +456,23 @@ async function renderpopularMovie () {
                       <span class="a11y-hidden">상세 정보</span>
                     </button>
                   </div>
-                </li>`
-  })
-  $popularMovieList.innerHTML = listHtml
+                </li>`;
+  });
+  $popularMovieList.innerHTML = listHtml;
 }
 
-async function render () {
+async function render() {
   // state set
-  renderMainTv()
-  renderMainMovie()
-  renderRatedTv()
-  renderpopularTv()
-  renderRateMovie()
-  renderpopularMovie()
+  renderMainTv();
+  renderMainMovie();
+  renderRatedTv();
+  renderpopularTv();
+  renderRateMovie();
+  renderpopularMovie();
 }
 
-function init () {
-  render()
+function init() {
+  render();
 }
 
-init()
+init();
