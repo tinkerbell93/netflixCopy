@@ -6,7 +6,8 @@ const $tvShowList = document.querySelector('.main-tvShow-list ul');
 const $movieList = document.querySelector('.main-movie-list ul');
 const $rateTvShowList = document.querySelector('.rate-tvShow-list ul');
 const $popularTvShowList = document.querySelector('.popular-tvShow-list ul');
-const $rateMovieList = document.querySelector('.rate-movie-list ul');
+const mainMovie = document.querySelector('.main-movie');
+const $rateMovieList = mainMovie.querySelector('.rate-Movie-list > ul');
 const $popularMovieList = document.querySelector('.popular-movie-list ul');
 
 // Genre List
@@ -128,7 +129,7 @@ function getGenre(movie) {
   function matchGenre(id) {
     let genreName = '';
     genresList.forEach(genre => {
-      genre.id === id ? genreName = genre.name : '';
+      genre.id === id ? (genreName = genre.name) : '';
     });
     return genreName;
   }
@@ -164,7 +165,11 @@ async function renderMainTv() {
                       <h4 class="item-title">${tvshow.name}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${tvshow.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
+                          ${
+  tvshow.adult
+    ? '청소년 관람 불가'
+    : '모든 연령 관람 가능'
+}
                         </li>
                         <li>
                         ${getGenre(tvshow)}
@@ -218,7 +223,11 @@ async function renderMainMovie() {
                       <h4 class="item-title">${movie.title}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${movie.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
+                          ${
+  movie.adult
+    ? '청소년 관람 불가'
+    : '모든 연령 관람 가능'
+}
                         </li>
                         <li>
                           ${getGenre(movie)}
@@ -259,45 +268,47 @@ async function renderRatedTv() {
   let listHtml = '';
 
   tvShowsList.forEach(tvshow => {
-    listHtml += `<li class="item">
-                  <div class="bob-container">
-                    <img alt="${tvshow.title}"
-                    src="${IMAGEURL}/w${WIDTH}${tvshow.backdrop_path}">
-                    <div class="bob-overview-wapper">
-                      <button type="button" class="play-btn icon-play">                 
-                        <span class="a11y-hidden">재생</span>
-                      </button>
-                      <!-- 콘텐츠 정보 -->
-                      <h4 class="item-title">${tvshow.name}</h4>
-                      <ul>
-                        <li class="maturity-rating">
-                          ${tvshow.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
-                        </li>
-                        <li>
-                        ${getGenre(tvshow)}
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="bob-actions-wrapper">
-                      <div class="thumbs-wrapper">
-                        <button type="button" class="like-btn icon-thumbs-up">                  
-                          <span class="a11y-hidden">좋아요</span>
-                        </button>
-                        <button type="button" class="dislike-btn icon-thumbs-down">                   
-                          <span class="a11y-hidden">싫어요</span>
-                        </button>
-                        <button type="button" class="myList-btn icon-plus">                   
-                          <span class="a11y-hidden">내가 찜한 콘텐츠</span>
-                        </button>
-                      </div>
-                    </div>
-                    
-                    <!-- 클릭 시 상세정보 뜸 -->
-                    <button type="button" class="detail-btn">
-                      <span class="a11y-hidden">상세 정보</span>
-                    </button>
-                  </div>
-                </li>`;
+    if (tvshow.backdrop_path) {
+      listHtml += `<li class="item">
+      <div class="bob-container">
+        <img alt="${tvshow.title}"
+        src="${IMAGEURL}/w${WIDTH}${tvshow.backdrop_path}">
+        <div class="bob-overview-wapper">
+          <button type="button" class="play-btn icon-play">                 
+            <span class="a11y-hidden">재생</span>
+          </button>
+          <!-- 콘텐츠 정보 -->
+          <h4 class="item-title">${tvshow.name}</h4>
+          <ul>
+            <li class="maturity-rating">
+              ${tvshow.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
+            </li>
+            <li>
+            ${getGenre(tvshow)}
+            </li>
+          </ul>
+        </div>
+        <div class="bob-actions-wrapper">
+          <div class="thumbs-wrapper">
+            <button type="button" class="like-btn icon-thumbs-up">                  
+              <span class="a11y-hidden">좋아요</span>
+            </button>
+            <button type="button" class="dislike-btn icon-thumbs-down">                   
+              <span class="a11y-hidden">싫어요</span>
+            </button>
+            <button type="button" class="myList-btn icon-plus">                   
+              <span class="a11y-hidden">내가 찜한 콘텐츠</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- 클릭 시 상세정보 뜸 -->
+        <button type="button" class="detail-btn">
+          <span class="a11y-hidden">상세 정보</span>
+        </button>
+      </div>
+    </li>`;
+    }
   });
   $rateTvShowList.innerHTML = listHtml;
 }
@@ -314,17 +325,21 @@ async function renderpopularTv() {
   tvShowList.forEach(tvshow => {
     listHtml += `<li class="item">
                   <div class="bob-container">
-                    <img alt="${tvshow.title}"
+                    <img alt="${tvshow.name}"
                     src="${IMAGEURL}/w${WIDTH}${tvshow.backdrop_path}">
                     <div class="bob-overview-wapper">
                       <button type="button" class="play-btn icon-play">                 
                         <span class="a11y-hidden">재생</span>
                       </button>
                       <!-- 콘텐츠 정보 -->
-                      <h4 class="item-title">${tvshow.title}</h4>
+                      <h4 class="item-title">${tvshow.name}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${tvshow.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
+                          ${
+  tvshow.adult
+    ? '청소년 관람 불가'
+    : '모든 연령 관람 가능'
+}
                         </li>
                         <li>
                           ${getGenre(tvshow)}
@@ -377,7 +392,11 @@ async function renderRateMovie() {
                       <h4 class="item-title">${movie.title}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${movie.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
+                          ${
+  movie.adult
+    ? '청소년 관람 불가'
+    : '모든 연령 관람 가능'
+}
                         </li>
                         <li>
                           ${getGenre(movie)}
@@ -405,10 +424,12 @@ async function renderRateMovie() {
                   </div>
                 </li>`;
   });
+  console.log($rateMovieList);
+
   $rateMovieList.innerHTML = listHtml;
 }
 
-// Moives > 순위 Movies List
+// Moives > 인기 Movies List
 async function renderpopularMovie() {
   // state
   const moviesList = await tmdb().popularMovie();
@@ -430,7 +451,11 @@ async function renderpopularMovie() {
                       <h4 class="item-title">${movie.title}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${movie.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
+                          ${
+  movie.adult
+    ? '청소년 관람 불가'
+    : '모든 연령 관람 가능'
+}
                         </li>
                         <li>
                           ${getGenre(movie)}
