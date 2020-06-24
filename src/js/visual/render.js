@@ -1,7 +1,7 @@
 // api
 import tmdb from '../api/tmdb'
 
-// 찜 목록
+// 찜 목록 이동
 const myList = document.querySelector('.myList')
 // visualDetails DOMs
 const mainVisual = document.querySelector('.main-visual')
@@ -169,6 +169,7 @@ function addList (e) {
   }
 
   item = localStorage.getItem('itemList')
+  console.log(JSON.parse(item))
 }
 
 async function searchList (e) {
