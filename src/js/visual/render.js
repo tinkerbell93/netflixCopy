@@ -24,6 +24,7 @@ const cast = overview.querySelector('.cast')
 const castListItems = cast.querySelector('.list-items')
 const genres = overview.querySelector('.genres')
 const genresListItems = genres.querySelector('.list-items')
+const addListBtn = overview.querySelector('.addList-btn')
 // infoMore-nav-lists-roundInfo
 const c = mainNavigation.querySelector('.infoMore-nav-lists-roundInfo')
 // infoMore-nav-lists-similarInfo
@@ -112,7 +113,6 @@ async function infoOverview () {
   castView = castView.slice(0, 3)
 
   let genres = await detailView.genres
-  console.log(genres)
 
   // render
   infoMoreBg.style.backgroundImage = `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 70px, rgba(20, 20, 20, 1) 90vh), url(${contentImage[0]})`
@@ -131,10 +131,29 @@ async function infoOverview () {
   })
 }
 
+function addList (e) {
+  let item = localStorage.getItem('itemList')
+  let id = content.id
+  let temp = ''
+
+  if (ranNum < 20) {
+    temp = 'movie'
+    item = [...item, { moive: id }]
+
+    localStorage.setItem('itemList', JSON.stringify(item))
+  } else {
+    temp = 'tv'
+    item.push({ tv: id })
+    localStorage.setItem('itemList', JSON.stringify(item))
+  }
+  item = localStorage.getItem('itemList')
+  console.log(JSON.parse(item))
+}
+
 async function init () {
   await render()
   infoMoreBtn.addEventListener('click', infoOverview)
-  console.log(content)
+  addListBtn.addEventListener('click', addList)
 }
 
 init()
