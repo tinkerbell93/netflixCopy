@@ -6,7 +6,6 @@ export default function tmdbApi() {
   const APIKEY = 'api_key=250ed9163433644ad57f1350029b12e8';
   const REGION = '&region=kr';
   const WIDTH = 1280;
-
   const MOVIE = 'movie';
   const TV = 'tv';
   const POPULAR = 'popular';
@@ -61,7 +60,6 @@ export default function tmdbApi() {
     let imageList = lists.map((list) => `${IMAGEURL}/w${WIDTH}${list}`);
     return imageList;
   }
-
   // 검색
   async function searchAll(query = '') {
     let fullUrl = `${BASEURL}/search/multi?${APIKEY}${LANGUAGE}&query=${query}&page=1&include_adult=false${REGION}`;
@@ -75,7 +73,6 @@ export default function tmdbApi() {
     epLists = await getEpList.json().then((list) => list.episodes);
     return epLists;
   }
-
   // 비슷한 목록
   async function getSmilarList(kind, id) {
     let fullUrl = `${BASEURL}/${kind}/${id}/similar?${APIKEY}${LANGUAGE}&page=1`;
@@ -84,7 +81,24 @@ export default function tmdbApi() {
     smilarLists = await getList.json().then((list) => list.results);
     return smilarLists;
   }
-
+  // 종류
+  async function getGnere() {
+    let fullUrl = `${BASEURL}/genre/${MOVIE}/list?${APIKEY}${LANGUAGE}`;
+    let getList = await fetch(fullUrl);
+    let getGnere = []
+    let temp = [];
+    getGnere = await getList.json().then((list) => list.genres);
+    fullUrl = `${BASEURL}/genre/${TV}/list?${APIKEY}${LANGUAGE}`;
+    getList = await fetch(fullUrl);
+    temp = await getList.json().then((list) => list.genres);
+    getGnere = [...getGnere, ...temp]
+    getGnere = getGnere.filter((thing,index) => {
+      return index === getGnere.findIndex(obj => {
+        return JSON.stringify(obj) === JSON.stringify(thing);
+      });
+    });
+    return getGnere
+}
   return {
     popularTv,
     popularMovie,
@@ -96,32 +110,6 @@ export default function tmdbApi() {
     getTvEpisodes,
     stillImage,
     getSmilarList,
+    getGnere,
   };
 }
-
-// async function init () {
-//   let test = tmdbApi()
-//   // getList
-//   console.log(await test.popularTv(2))
-//   console.log(await test.popularMovie(2))
-//   console.log(await test.ratedTv(2))
-//   console.log(await test.ratedMovie(2))
-//   let getMove = await test.popularMovie(2)
-//   // getImage
-//   let getImage = await test.popularTv(2)
-//   console.log(await test.backdropImage(getImage))
-//   console.log(await test.posterImage(getImage))
-
-//   // search
-//   console.log(await test.searchAll('무한도전'))
-
-//   //티비 에피소드 or 스틸 컷
-//   console.log(await test.getTvEpisodes(getImage[0]))
-//   let epImg = await test.getTvEpisodes(getImage[0])
-//   console.log(await test.stillImage(epImg))
-
-//   // 비슷한 목록
-//   console.log(await test.getSmilarList('movie', getMove[0].id))
-// }
-
-// init()
