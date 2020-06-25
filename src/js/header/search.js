@@ -1,11 +1,12 @@
-import none from '../api/tmdb';
+// import none from '../api/tmdb';
 
-async function init() {
-  let test = await none().searchAll('무한도전');
-  console.log(test);
-}
-init();
+// async function init() {
+//   let test = await none().searchAll('무한도전');
+//   console.log(test);
+// }
+// init();
 
+const $header = document.querySelector('.header');
 const $navigationList = document.querySelector('.navigation-list');
 const $navigationListItem = document.querySelector('navigation-list > li');
 const $searchFormContainer = document.querySelector('.search-form-container');
@@ -32,3 +33,7 @@ $contentSearch.onblur = e => {
   $searchFormContainer.classList.remove('active');
 };
 
+// 스크롤 발생 시 헤더 배경 투명 -> 검은색 변경
+window.onscroll = () => {
+  $header.style.backgroundColor = 'black';
+}
