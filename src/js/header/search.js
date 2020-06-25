@@ -1,11 +1,10 @@
-import none from '../api/tmdb'
+import none from '../api/tmdb';
 
-async function init(){
-  let test = await none().searchAll('무한도전')
+async function init() {
+  let test = await none().searchAll('무한도전');
   console.log(test);
-  
 }
-init()
+init();
 
 const $navigationList = document.querySelector('.navigation-list');
 const $navigationListItem = document.querySelector('navigation-list > li');
@@ -24,7 +23,7 @@ $navigationList.onclick = ({ target }) => {
 };
 
 // 돋보기 버튼 클릭 시 input 박스 애니메이션 효과
-$iconSearch.onclick = () => { 
+$iconSearch.onclick = () => {
   $searchForm.classList.add('active');
   $iconSearch.classList.add('active');
   $contentSearch.classList.add('active');
@@ -33,5 +32,3 @@ $iconSearch.onclick = () => {
 console.log($searchFormContainer.querySelectorAll('.active'));
 // $contentSearch.focus();
 // $contentSearch.select();
-
-
