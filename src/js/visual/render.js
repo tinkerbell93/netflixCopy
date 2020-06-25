@@ -285,8 +285,6 @@ async function init() {
   addListBtn.addEventListener('click', addList);
   logo.addEventListener('click', gHome);
   myList.addEventListener('click', searchList);
-  prev.addEventListener('click', moveToPrev);
-  next.addEventListener('click', moveToNext);
 }
 
 init();
