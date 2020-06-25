@@ -20,7 +20,6 @@ main h3 button{
 
 // 리스트 아이템
 .item-wrapper {
-  width: 6000px;
 }
 .item-wrapper > ul {
   display: flex;
@@ -38,8 +37,10 @@ main h3 button{
   position: relative;
 }
 .bob-container {
-  width: 90%;
+  transform: scale(0.6);
   transition: all .3s;
+  margin-left: -75px;
+  margin-right: -75px;
 }
 .bob-container::before {
   content: '';
@@ -50,9 +51,9 @@ main h3 button{
   width: 90%;
   height: 100%;
 }
-.bob-container > img {
-  width: 100%;
-  height: 100px;
+.bob-container > img  {
+  width: 400px;
+  height: 225px;
 }
 .bob-container div,
 .bob-container .detail-btn {
@@ -63,10 +64,11 @@ main h3 button{
   visibility: visible;
 }
 .bob-container:hover {
-  width: 500px;
+  transform: scale(1);
+  margin: 0;
 }
 .bob-container:hover > img {
-  height: 280px;
+  // height: 280px;
 }
 
 // 리스트 아이템 버튼 
