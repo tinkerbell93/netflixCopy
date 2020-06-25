@@ -38,12 +38,12 @@ main h3 button{
   position: relative;
 }
 .bob-container {
-  transform: scale(0.9);
+  width: 90%;
   transition: all .3s;
 }
 .bob-container::before {
   content: '';
-  background-image: linear-gradient(to left, rgba(20, 20, 20, 0.7), rgba(0, 0, 0, 0) 0px, #141414 90vh);
+  background-image: linear-gradient(to left, rgba(20, 20, 20, 0.7), rgba(0, 0, 0, 0) 0px, #141414 120vh);
   position: absolute;
   top: 0;
   left: 0;
@@ -51,21 +51,22 @@ main h3 button{
   height: 100%;
 }
 .bob-container > img {
-  // width: 100%;
-  width: 280px;
-  height: 160px;
+  width: 100%;
+  height: 100px;
 }
 .bob-container div,
 .bob-container .detail-btn {
-  // visibility: hidden;
+  visibility: hidden;
 }
 .bob-container:hover div,
 .bob-container:hover .detail-btn {
   visibility: visible;
 }
 .bob-container:hover {
-  // width: 100%;
-  transform: scale(1);
+  width: 500px;
+}
+.bob-container:hover > img {
+  height: 280px;
 }
 
 // 리스트 아이템 버튼 
