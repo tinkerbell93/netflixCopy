@@ -23,16 +23,13 @@ $navigationList.onclick = ({ target }) => {
 
 // 돋보기 버튼 클릭 시 input 박스 애니메이션 효과
 $iconSearch.onclick = () => {
-  $searchForm.classList.add('active');
-  $iconSearch.classList.add('active');
-  $contentSearch.classList.add('active');
+  $searchFormContainer.classList.add('active');
+  $contentSearch.focus();
 };
 
-// 포커스가 빠지면
-$iconSearch.onblur = () => {
-
+// 포커스가 빠지면 서치박스 닫힘
+$contentSearch.onblur = e => {
+  if($contentSearch.value !== '') return;
+  $searchFormContainer.classList.remove('active');
 };
 
-// $searchFormContainer.querySelectorAll('.active');
-// $contentSearch.focus();
-// $contentSearch.select();

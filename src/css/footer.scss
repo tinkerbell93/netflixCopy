@@ -15,8 +15,7 @@
     display: grid;
     grid-template-rows: repeat(4, 1fr);
     grid-template-columns: repeat(4, 1fr);
-    width: 80vw;
-    
+    width: 80vw;  
 
     li {
       justify-content: center;
@@ -34,5 +33,4 @@
   .address {
     font-style: normal;
   }
-  
 }
