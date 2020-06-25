@@ -15,7 +15,10 @@ const $prevBtn = document.querySelector('.prev-btn');
 const $nextBtn = document.querySelector('.next-btn');
 
 // stats
-let tvShowList;
+let sliderWrapper;
+let sliderContainer;
+let slideList;
+let slideCount;
 
 // 장르 리스트
 const genresList = [
@@ -151,15 +154,17 @@ function getGenre(movie) {
 }
 
 // 슬라이드
-function slide(list) {
+function slide(listContent) {
   // 슬라이드
+  sliderWrapper = listContent;
+  sliderContainer = listContent.querySelector('ul');
   const $sliderWrapper = document.querySelector('.slide-wrapper');
-  // const $sliderContainer = document.querySelector('.slide-wrapper > ul');
-  // const slides = document.getElementsByClassName('item');
-  // const slides = sliderContainer.children;
+  const $sliderContainer = document.querySelector('.slide-wrapper > ul');
+  const slides = document.getElementsByClassName('item');
   const $slides = document.querySelectorAll('.slide-wrapper li.item');
   const slideCount = [...$slides];
-  console.log('slide function 밖', tvShowList);
+
+  console.log('slide function', listContent);
 }
 
 // 메인 티비 프로그램 리스트
@@ -217,10 +222,11 @@ async function renderMainTv() {
     }
   });
   $tvShowList.innerHTML = listHtml;
-
-  tvShowList = $tvShowList.querySelectorAll('li.item');
-  $controls.onclick = () => {
-    slide(tvShowList);
+  
+  // slideList = $tvShowList.querySelectorAll('li.item');
+  $controls.onclick = ({ target }) => {
+    sliderWrapper = target.parentNode.parentNode;
+    slide(sliderWrapper);
   };
 }
 
