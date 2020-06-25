@@ -201,7 +201,7 @@ async function renderRatedTv() {
 
   // stats
   const startNum = 5; // initial slide index (0 ~ 4)
-  let curIndex = 5;
+  let curIndex = -1;
 
   // DOMs
   const $ul = $rateTvShowList.parentNode.querySelector('ul');
@@ -228,12 +228,11 @@ async function renderRatedTv() {
       true
     ),
   ];
-  console.log(clonedLast);
 
   // let clonedLast = lastChild.cloneNode(true);
 
   $ul.style.transform =
-    'translate3d(-' + slideWidth * (startNum + 5) + 'px, 0px, 0px)';
+    'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
 
   $ul.style.width = slideWidth * slideLen + 'px';
 
@@ -251,84 +250,46 @@ async function renderRatedTv() {
   // $ul.insertBefore(clonedLast, $ul.firstElementChild);
 
   const $item = $ul.querySelectorAll('.item');
-  let curSlide = [
-    $item[curIndex],
-    $item[curIndex + 1],
-    $item[curIndex + 2],
-    $item[curIndex + 3],
-    $item[curIndex + 4],
-  ];
-  console.log($item.length, '1');
   $ul.style.width = slideWidth * slideLen + 'px';
-  // curSlide.classList.add('slide_active');
-  curSlide.forEach((a) => {
-    a.classList.add('slide_active');
-  });
   const slideLen = $item.length;
   const slideWidth = 280;
   const slideSpeed = 300;
   $nextBtn.addEventListener('click', () => {
     if (curIndex <= slideLen - 5) {
-      console.log(curIndex);
+      
       $ul.style.transition = slideSpeed + 'ms';
       $ul.style.transform =
-        'translate3d(-' + slideWidth * (curIndex + 1) + 'px, 0px, 0px)';
+        'translate3d(-' + slideWidth * (curIndex + 2) + 'px, 0px, 0px)';
     }
-    if (curIndex >= slideLen - 9) {
+    if (curIndex > slideLen - 12) {
       console.log(curIndex);
       setTimeout(function () {
         $ul.style.transition = '0ms';
         $ul.style.transform = 'translate3d(-' + slideWidth + 'px, 0px, 0px)';
       }, slideSpeed);
-      curIndex = 0;
+      curIndex = -1;
     }
-
-    // curSlide.classList.remove('slide_active');
-    curSlide.forEach((a) => {
-      a.classList.remove('slide_active');
-    });
-    let temp = curIndex;
-    curSlide = [
-      $item[temp + 1],
-      $item[temp + 2],
-      $item[temp + 3],
-      $item[temp + 4],
-      $item[temp + 5],
-    ];
-    curIndex += 5;
-    curSlide.forEach((a) => {
-      a.classList.add('slide_active');
-    });
+    curIndex++;
   });
 
   $prevBtn.addEventListener('click', () => {
-    if (curIndex >= 0) {
+    
+    if (curIndex >= -1) {
+      console.log(curIndex);
       $ul.style.transition = slideSpeed + 'ms';
       $ul.style.transform =
-        'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
+        'translate3d(-' + slideWidth * curIndex  + 'px, 0px, 0px)';
     }
-    if (curIndex === 0) {
+    if (curIndex === -1) {
+      console.log(curIndex);
       setTimeout(function () {
         $ul.style.transition = '0ms';
         $ul.style.transform =
-          'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
+          'translate3d(-' + slideWidth * (slideLen - 11) + 'px, 0px, 0px)';
       }, slideSpeed);
-      curIndex = slideLen;
+      curIndex = slideLen - 11;
     }
-
-    curSlide.forEach((a) => {
-      a.classList.remove('slide_active');
-    });
-    curSlide = [
-      $item[curIndex],
-      $item[curIndex - 1],
-      $item[curIndex - 2],
-      $item[curIndex - 3],
-      $item[curIndex - 4],
-    ];
-    curSlide.forEach((a) => {
-      a.classList.add('slide_active');
-    });
+    curIndex--;
   });
 }
 
@@ -389,7 +350,8 @@ async function renderpopularTv() {
     }
   });
   $popularTvShowList.innerHTML = listHtml;
-
+  console.log($popularTvShowList , '뭐가 처음이냐');
+  
   // stats
   const startNum = 4;
   let curIndex = startNum;
