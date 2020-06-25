@@ -1,21 +1,38 @@
-.footer{
-  width: 50vw;
+.footer {
+  width: 80vw;
   margin: auto;
-  display: grid;
+  color: gray;
 
-.sns-list{
-  display: flex;
-  .facebook{
-
+  .sns-list {
+    display: flex;
+    font-size: 2rem;
+    li{
+      margin-right: 1.2rem;
+    }
   }
-  .instagram{
 
-  }
-  .twitter{
+  .guide-list {
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    width: 80vw;
+    
 
+    li {
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
   }
-  .youtube{
-
+  .service-code {
+    border: 1px solid white;
+    color: inherit;
+    padding: .7rem;
+    cursor: pointer;
+    margin: 30px 0;
   }
-}
+  .address {
+    font-style: normal;
+  }
+  
 }
