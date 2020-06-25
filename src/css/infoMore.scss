@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400);
+
 .infoMore{
   position: relative;
   background: #000;
@@ -10,7 +12,18 @@
   .info-wrap{
     margin: 0 auto;
     width: 90vw;
+    .btn{
+      position: absolute; 
+      left: 50%;
+      margin-left: -200px;
+      bottom: 10%;
+      .infoMore-nav-btn{
+        color: white;
+      }
+    }
+    
   }
+  
   .info-title{
     padding: 30px 0;
     font-size: 70px;
@@ -40,7 +53,7 @@
   justify-content: space-between;
 }
 .synopsis{
-  width: 600px;
+  width: 700px;
   word-break: keep-all;
 }
 .inline-list,
@@ -71,4 +84,24 @@
     background: red;
     margin-top: 10px;
   }
+}
+
+.thumbs-wrapper .like-btn,
+.thumbs-wrapper .dislike-btn
+{
+  border: none;
+  color : white;
+  display: inline;
+  text-align: center;
+}
+
+.carousel {
+  position: absolute;
+  top: 10%;
+  left: 50px;
+  
+}
+.test1-myList .item{
+  display: inline-block;
+  
 }
