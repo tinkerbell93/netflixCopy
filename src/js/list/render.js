@@ -155,25 +155,30 @@ function getGenre(movie) {
   return nameArr;
 }
 
+let curIndex = 0;
+let curSlide;
+
 // 슬라이드
 function slide(listContent, btn) {
   sliderWrapper = listContent;
-  sliderContainer = sliderWrapper.querySelector('ul');
-  slideList = sliderWrapper.querySelectorAll('li.item');
+  sliderContainer = sliderWrapper.querySelector('ul'); // slideList
+  slideList = sliderWrapper.querySelectorAll('li.item'); // slideContents
   slideCount = slideList.length;
 
   sliderContainer.style.width = `${slideWidth * slideCount}px`;
-  let curIndex = 0;
-  let curSlide = slideList[curIndex];
+  curSlide = slideList[curIndex]; // current slide dom
+  
+  console.log(curSlide);
 
-  console.log(slideWidth);
+  // console.log(slideWidth);
   if (btn.matches('.prev-btn')) {
     // prev
     console.log('prev');
+
   } else {
     // next
     if (curIndex <= slideCount - 1) {
-      sliderContainer.style.transition = `${slideSpeed}ms`;
+      // sliderContainer.style.transition = `${slideSpeed}ms`;
       sliderContainer.style.left = `-${slideWidth * (curIndex + 1)}px`;
     }
     curSlide = slideList[++curIndex];
