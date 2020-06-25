@@ -6,6 +6,7 @@ export default function tmdbApi() {
   const APIKEY = 'api_key=250ed9163433644ad57f1350029b12e8';
   const REGION = '&region=kr';
   const WIDTH = 1280;
+
   const MOVIE = 'movie';
   const TV = 'tv';
   const POPULAR = 'popular';
@@ -83,6 +84,7 @@ export default function tmdbApi() {
     smilarLists = await getList.json().then((list) => list.results);
     return smilarLists;
   }
+
   // 종류
   async function getGnere() {
     let fullUrl = `${BASEURL}/genre/${MOVIE}/list?${APIKEY}${LANGUAGE}`;
@@ -90,8 +92,10 @@ export default function tmdbApi() {
     let getGnere = [];
     let temp = [];
     getGnere = await getList.json().then((list) => list.genres);
+
     fullUrl = `${BASEURL}/genre/${TV}/list?${APIKEY}${LANGUAGE}`;
     getList = await fetch(fullUrl);
+
     temp = await getList.json().then((list) => list.genres);
     getGnere = [...getGnere, ...temp];
     getGnere = getGnere.filter((thing, index) => {
