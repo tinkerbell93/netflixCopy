@@ -15,8 +15,6 @@ const $searchForm = document.querySelector('.search-form');
 const $searchBox = document.querySelector('.search-box');
 const $contentSearch = document.getElementById('content-search');
 
-console.log('hi');
-
 // 네비게이션 클릭 시 네비 폰트 굵어지는 이벤트
 $navigationList.onclick = ({ target }) => {
   if (!target.matches('.navigation-list a')) return;
@@ -30,6 +28,11 @@ $iconSearch.onclick = () => {
   $contentSearch.classList.add('active');
 };
 
-console.log($searchFormContainer.querySelectorAll('.active'));
+// 포커스가 빠지면
+$iconSearch.onblur = () => {
+
+};
+
+// $searchFormContainer.querySelectorAll('.active');
 // $contentSearch.focus();
 // $contentSearch.select();
