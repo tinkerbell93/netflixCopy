@@ -63,7 +63,9 @@ export default function tmdbApi() {
   // 검색
   async function searchAll(query = '') {
     let fullUrl = `${BASEURL}/search/multi?${APIKEY}${LANGUAGE}&query=${query}&page=1&include_adult=false${REGION}`;
-    return fullUrl;
+    let getEpList = await fetch(fullUrl);
+    getEpList = await getEpList.json().then((list) => list.results);
+    return getEpList[0];
   }
   // 티비 에피소드
   async function getTvEpisodes(tvObj = {}) {
@@ -85,20 +87,73 @@ export default function tmdbApi() {
   async function getGnere() {
     let fullUrl = `${BASEURL}/genre/${MOVIE}/list?${APIKEY}${LANGUAGE}`;
     let getList = await fetch(fullUrl);
-    let getGnere = []
+    let getGnere = [];
     let temp = [];
     getGnere = await getList.json().then((list) => list.genres);
     fullUrl = `${BASEURL}/genre/${TV}/list?${APIKEY}${LANGUAGE}`;
     getList = await fetch(fullUrl);
     temp = await getList.json().then((list) => list.genres);
-    getGnere = [...getGnere, ...temp]
-    getGnere = getGnere.filter((thing,index) => {
-      return index === getGnere.findIndex(obj => {
-        return JSON.stringify(obj) === JSON.stringify(thing);
-      });
+    getGnere = [...getGnere, ...temp];
+    getGnere = getGnere.filter((thing, index) => {
+      return (
+        index ===
+        getGnere.findIndex((obj) => {
+          return JSON.stringify(obj) === JSON.stringify(thing);
+        })
+      );
     });
-    return getGnere
-}
+    return getGnere;
+  }
+  async function detailMovie(id) {
+    let fullUrl = `${BASEURL}/${MOVIE}/${id}?${APIKEY}${LANGUAGE}`;
+    let movieDetail = {};
+    let getDetail = await fetch(fullUrl);
+    movieDetail = await getDetail.json().then((list) => list);
+    return movieDetail;
+  }
+  async function detailTv(id) {
+    let fullUrl = `${BASEURL}/${TV}/${id}?${APIKEY}${LANGUAGE}`;
+    let tvDetail = {};
+    let getDetail = await fetch(fullUrl);
+    tvDetail = await getDetail.json().then((list) => list);
+    return tvDetail;
+  }
+  // 배우
+  async function castMovie(id) {
+    let fullUrl = `${BASEURL}/${MOVIE}/${id}/credits?${APIKEY}${LANGUAGE}`;
+    let movieCast = {};
+    let getCast = await fetch(fullUrl);
+    movieCast = await getCast.json().then((list) => list);
+    return movieCast;
+  }
+  async function castTv(id) {
+    let fullUrl = `${BASEURL}/${TV}/${id}/credits?${APIKEY}${LANGUAGE}`;
+    let tvCast = {};
+    let getCast = await fetch(fullUrl);
+    tvCast = await getCast.json().then((list) => list);
+    return tvCast;
+  }
+  // 종류
+  async function getGnere() {
+    let fullUrl = `${BASEURL}/genre/${MOVIE}/list?${APIKEY}${LANGUAGE}`;
+    let getList = await fetch(fullUrl);
+    let getGnere = [];
+    let temp = [];
+    getGnere = await getList.json().then((list) => list.genres);
+    fullUrl = `${BASEURL}/genre/${TV}/list?${APIKEY}${LANGUAGE}`;
+    getList = await fetch(fullUrl);
+    temp = await getList.json().then((list) => list.genres);
+    getGnere = [...getGnere, ...temp];
+    getGnere = getGnere.filter((thing, index) => {
+      return (
+        index ===
+        getGnere.findIndex((obj) => {
+          return JSON.stringify(obj) === JSON.stringify(thing);
+        })
+      );
+    });
+    return getGnere;
+  }
   return {
     popularTv,
     popularMovie,
@@ -111,5 +166,14 @@ export default function tmdbApi() {
     stillImage,
     getSmilarList,
     getGnere,
+    detailMovie,
+    detailTv,
+    castMovie,
+    castTv,
   };
 }
+// async function init() {
+//   let test = tmdbApi();
+//   console.log(await test.searchAll('무한도전'));
+// }
+// init();
