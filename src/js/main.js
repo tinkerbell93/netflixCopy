@@ -8,3 +8,6 @@ const mainvis = require('./visual/render.js');
 
 // LIST
 const list = require('./list/render.js');
+
+// 헤더
+const headerSearch = require('./header/search.js');
