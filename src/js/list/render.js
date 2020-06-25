@@ -151,7 +151,7 @@ function getGenre(movie) {
 }
 
 // 슬라이드
-function slide(tvShowList) {
+function slide(list) {
   // 슬라이드
   const $sliderWrapper = document.querySelector('.slide-wrapper');
   // const $sliderContainer = document.querySelector('.slide-wrapper > ul');
@@ -219,11 +219,7 @@ async function renderMainTv() {
   $tvShowList.innerHTML = listHtml;
 
   tvShowList = $tvShowList.querySelectorAll('li.item');
-  console.log('function안', tvShowList);
-
-  $controls.onclick = e => {
-    if (!e.target.matchs('.next-btn')) return;
-    console.log('test');
+  $controls.onclick = () => {
     slide(tvShowList);
   };
 }
