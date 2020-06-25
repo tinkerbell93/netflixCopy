@@ -14,14 +14,6 @@ const $controls = document.querySelector('.controls');
 const $prevBtn = document.querySelector('.prev-btn');
 const $nextBtn = document.querySelector('.next-btn');
 
-// stats
-let sliderWrapper;
-let sliderContainer;
-let slideList;
-let slideCount;
-const slideWidth = 280;
-const slideSpeed = 300;
-
 // 장르 리스트
 const genresList = [
   {
@@ -155,31 +147,6 @@ function getGenre(movie) {
   return nameArr;
 }
 
-// 슬라이드
-function slide(listContent, btn) {
-  sliderWrapper = listContent;
-  sliderContainer = sliderWrapper.querySelector('ul');
-  slideList = sliderWrapper.querySelectorAll('li.item');
-  slideCount = slideList.length;
-
-  sliderContainer.style.width = `${slideWidth * slideCount}px`;
-  let curIndex = 0;
-  let curSlide = slideList[curIndex];
-
-  console.log(slideWidth);
-  if (btn.matches('.prev-btn')) {
-    // prev
-    console.log('prev');
-  } else {
-    // next
-    if (curIndex <= slideCount - 1) {
-      sliderContainer.style.transition = `${slideSpeed}ms`;
-      sliderContainer.style.left = `-${slideWidth * (curIndex + 1)}px`;
-    }
-    curSlide = slideList[++curIndex];
-  }
-}
-
 // 티비 프로그램 > 순위 티비 프로그램 리스트
 async function renderRatedTv() {
   // state
@@ -234,10 +201,73 @@ async function renderRatedTv() {
   });
   $rateTvShowList.innerHTML = listHtml;
 
-  $controls.onclick = ({ target }) => {
-    sliderWrapper = target.parentNode.parentNode;
-    slide(sliderWrapper, target);
-  };
+  // stats
+  const startNum = 0; // initial slide index (0 ~ 4)
+  let curIndex = 0;
+
+  // DOMs
+  const $slideWrapper = document.querySelector('.slide-wrapper');
+  const $ul = $slideWrapper.querySelector('ul');
+  const $item = $ul.querySelectorAll('.item');
+  let firstChild = $ul.firstElementChild;
+  let lastChild = $ul.lastElementChild;
+  let clonedFirst = firstChild.cloneNode(true);
+  let clonedLast = lastChild.cloneNode(true);
+
+  $ul.style.transform =
+    'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
+
+  $ul.style.width = slideWidth * (slideLen + 2) + 'px';
+
+  // addClone node
+  $ul.appendChild(clonedFirst);
+  $ul.insertBefore(clonedLast, $ul.firstElementChild);
+
+  let curSlide = $item[curIndex];
+  $ul.style.width = slideWidth * (slideLen + 2) + 'px';
+
+  // curSlide.classList.add('slide_active');
+  const slideLen = $item.length - 3;
+  const slideWidth = 280;
+  const slideSpeed = 300;
+  $nextBtn.addEventListener('click', () => {
+    if (curIndex <= slideLen - 1) {
+      $ul.style.transition = slideSpeed + 'ms';
+      $ul.style.transform =
+        'translate3d(-' + slideWidth * (curIndex + 1) + 'px, 0px, 0px)';
+    }
+    if (curIndex === slideLen - 1) {
+      setTimeout(function () {
+        $ul.style.transition = '0ms';
+        $ul.style.transform = 'translate3d(-' + slideWidth + 'px, 0px, 0px)';
+      }, slideSpeed);
+      curIndex = -1;
+    }
+
+    curSlide.classList.remove('slide_active');
+    curSlide = $item[++curIndex];
+    curSlide.classList.add('slide_active');
+  });
+
+  $prevBtn.addEventListener('click', () => {
+    if (curIndex >= 0) {
+      $ul.style.transition = slideSpeed + 'ms';
+      $ul.style.transform =
+        'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
+    }
+    if (curIndex === 0) {
+      setTimeout(function () {
+        $ul.style.transition = '0ms';
+        $ul.style.transform =
+          'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
+      }, slideSpeed);
+      curIndex = slideLen;
+    }
+
+    curSlide.classList.remove('slide_active');
+    curSlide = $item[--curIndex];
+    curSlide.classList.add('slide_active');
+  });
 }
 
 // 티비 프로그램 > 인기 티비 프로그램 리스트
