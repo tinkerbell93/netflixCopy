@@ -11,8 +11,6 @@ const $rateMovieList = mainMovie.querySelector('.rate-Movie-list > ul');
 const $popularMovieList = document.querySelector('.popular-movie-list ul');
 // 슬라이드
 const $controls = document.querySelector('.controls');
-const $prevBtn = document.querySelector('.prev-btn');
-const $nextBtn = document.querySelector('.next-btn');
 
 // 장르 리스트
 const genresList = [
@@ -202,51 +200,105 @@ async function renderRatedTv() {
   $rateTvShowList.innerHTML = listHtml;
 
   // stats
-  const startNum = 0; // initial slide index (0 ~ 4)
-  let curIndex = 0;
+  const startNum = 5; // initial slide index (0 ~ 4)
+  let curIndex = 5;
 
   // DOMs
-  const $slideWrapper = document.querySelector('.slide-wrapper');
-  const $ul = $slideWrapper.querySelector('ul');
-  const $item = $ul.querySelectorAll('.item');
+  const $ul = $rateTvShowList.parentNode.querySelector('ul');
+  const $nextBtn = $ul.parentNode.parentNode.querySelector('.next-btn');
+  const $prevBtn = $ul.parentNode.parentNode.querySelector('.prev-btn');
+
   let firstChild = $ul.firstElementChild;
   let lastChild = $ul.lastElementChild;
-  let clonedFirst = firstChild.cloneNode(true);
-  let clonedLast = lastChild.cloneNode(true);
+  let clonedFirst = [
+    firstChild.cloneNode(true),
+    firstChild.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.nextSibling.nextSibling.cloneNode(true),
+  ];
+  // let clonedFirst = firstChild.cloneNode(true);
+
+  let clonedLast = [
+    lastChild.cloneNode(true),
+    lastChild.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.previousSibling.previousSibling.cloneNode(
+      true
+    ),
+  ];
+  console.log(clonedLast);
+
+  // let clonedLast = lastChild.cloneNode(true);
 
   $ul.style.transform =
-    'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
+    'translate3d(-' + slideWidth * (startNum + 5) + 'px, 0px, 0px)';
 
-  $ul.style.width = slideWidth * (slideLen + 2) + 'px';
+  $ul.style.width = slideWidth * slideLen + 'px';
 
   // addClone node
-  $ul.appendChild(clonedFirst);
-  $ul.insertBefore(clonedLast, $ul.firstElementChild);
+  clonedFirst.forEach((a) => {
+    a.classList.add('item');
+    $ul.appendChild(a);
+  });
+  clonedLast.forEach((b) => {
+    b.classList.add('item');
+    $ul.insertBefore(b, $ul.firstElementChild);
+  });
 
-  let curSlide = $item[curIndex];
-  $ul.style.width = slideWidth * (slideLen + 2) + 'px';
+  // $ul.appendChild(clonedFirst);
+  // $ul.insertBefore(clonedLast, $ul.firstElementChild);
 
+  const $item = $ul.querySelectorAll('.item');
+  let curSlide = [
+    $item[curIndex],
+    $item[curIndex + 1],
+    $item[curIndex + 2],
+    $item[curIndex + 3],
+    $item[curIndex + 4],
+  ];
+  console.log($item.length, '1');
+  $ul.style.width = slideWidth * slideLen + 'px';
   // curSlide.classList.add('slide_active');
-  const slideLen = $item.length - 3;
+  curSlide.forEach((a) => {
+    a.classList.add('slide_active');
+  });
+  const slideLen = $item.length;
   const slideWidth = 280;
   const slideSpeed = 300;
   $nextBtn.addEventListener('click', () => {
-    if (curIndex <= slideLen - 1) {
+    if (curIndex <= slideLen - 5) {
+      console.log(curIndex);
       $ul.style.transition = slideSpeed + 'ms';
       $ul.style.transform =
         'translate3d(-' + slideWidth * (curIndex + 1) + 'px, 0px, 0px)';
     }
-    if (curIndex === slideLen - 1) {
+    if (curIndex >= slideLen - 9) {
+      console.log(curIndex);
       setTimeout(function () {
         $ul.style.transition = '0ms';
         $ul.style.transform = 'translate3d(-' + slideWidth + 'px, 0px, 0px)';
       }, slideSpeed);
-      curIndex = -1;
+      curIndex = 0;
     }
 
-    curSlide.classList.remove('slide_active');
-    curSlide = $item[++curIndex];
-    curSlide.classList.add('slide_active');
+    // curSlide.classList.remove('slide_active');
+    curSlide.forEach((a) => {
+      a.classList.remove('slide_active');
+    });
+    let temp = curIndex;
+    curSlide = [
+      $item[temp + 1],
+      $item[temp + 2],
+      $item[temp + 3],
+      $item[temp + 4],
+      $item[temp + 5],
+    ];
+    curIndex += 5;
+    curSlide.forEach((a) => {
+      a.classList.add('slide_active');
+    });
   });
 
   $prevBtn.addEventListener('click', () => {
@@ -264,9 +316,19 @@ async function renderRatedTv() {
       curIndex = slideLen;
     }
 
-    curSlide.classList.remove('slide_active');
-    curSlide = $item[--curIndex];
-    curSlide.classList.add('slide_active');
+    curSlide.forEach((a) => {
+      a.classList.remove('slide_active');
+    });
+    curSlide = [
+      $item[curIndex],
+      $item[curIndex - 1],
+      $item[curIndex - 2],
+      $item[curIndex - 3],
+      $item[curIndex - 4],
+    ];
+    curSlide.forEach((a) => {
+      a.classList.add('slide_active');
+    });
   });
 }
 
@@ -327,6 +389,147 @@ async function renderpopularTv() {
     }
   });
   $popularTvShowList.innerHTML = listHtml;
+
+  // stats
+  const startNum = 4;
+  let curIndex = startNum;
+
+  // DOMs
+
+  const $ul = $popularTvShowList.parentNode.querySelector('ul');
+  const $nextBtn = $ul.parentNode.parentNode.querySelector('.next-btn');
+  const $prevBtn = $ul.parentNode.parentNode.querySelector('.prev-btn');
+
+  let firstChild = $ul.firstElementChild;
+  let lastChild = $ul.lastElementChild;
+  let clonedFirst = [
+    firstChild.cloneNode(true),
+    firstChild.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.nextSibling.nextSibling.cloneNode(true),
+  ];
+  // let clonedFirst = firstChild.cloneNode(true);
+
+  let clonedLast = [
+    lastChild.cloneNode(true),
+    lastChild.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.previousSibling.previousSibling.cloneNode(
+      true
+    ),
+  ];
+  console.log(clonedLast);
+
+  // let clonedLast = lastChild.cloneNode(true);
+
+  $ul.style.transform =
+    'translate3d(-' + slideWidth * startNum + 'px, 0px, 0px)';
+
+  $ul.style.width = slideWidth * slideLen + 'px';
+
+  // addClone node
+  clonedFirst.forEach((a) => {
+    a.classList.add('item');
+    $ul.appendChild(a);
+  });
+  clonedLast.forEach((b) => {
+    b.classList.add('item');
+    $ul.insertBefore(b, $ul.firstElementChild);
+  });
+
+  // $ul.appendChild(clonedFirst);
+  // $ul.insertBefore(clonedLast, $ul.firstElementChild);
+
+  const $item = $ul.querySelectorAll('.item');
+  let curSlide = [
+    $item[curIndex],
+    $item[curIndex + 1],
+    $item[curIndex + 2],
+    $item[curIndex + 3],
+    $item[curIndex + 4],
+  ];
+  $ul.style.width = slideWidth * slideLen + 'px';
+  // curSlide.classList.add('slide_active');
+  curSlide.forEach((a) => {
+    a.classList.add('slide_active');
+  });
+  const slideLen = $item.length - 1;
+  const slideWidth = 280;
+  const slideSpeed = 300;
+
+  // --------------------------------------------
+  $nextBtn.addEventListener('click', () => {
+    if (curIndex <= slideLen - 5) {
+      console.log(curIndex);
+      $ul.style.transition = slideSpeed + 'ms';
+      $ul.style.transform =
+        'translate3d(-' + slideWidth * (curIndex + 1) + 'px, 0px, 0px)';
+    }
+    if (curIndex === slideLen - 10) {
+      console.log(curIndex);
+      setTimeout(function () {
+        $ul.style.transition = '0ms';
+        $ul.style.transform = 'translate3d(-' + 0 + 'px, 0px, 0px)';
+      }, slideSpeed);
+      curIndex = -1;
+    }
+
+    // curSlide.classList.remove('slide_active');
+    curSlide.forEach((a) => {
+      a.classList.remove('slide_active');
+    });
+    let temp = curIndex;
+
+    curSlide = [
+      $item[temp + 1],
+      $item[temp + 2],
+      $item[temp + 3],
+      $item[temp + 4],
+      $item[temp + 5],
+    ];
+    curIndex += 5;
+    curSlide.forEach((a) => {
+      a.classList.add('slide_active');
+    });
+  });
+  // --------------------------------------------
+  $prevBtn.addEventListener('click', () => {
+    if (curIndex >= 4) {
+      console.log(curIndex);
+
+      $ul.style.transition = slideSpeed + 'ms';
+      $ul.style.transform =
+        'translate3d(-' + slideWidth * (curIndex + 1) + 'px, 0px, 0px)';
+    }
+    if (curIndex === 4) {
+      console.log(curIndex);
+      setTimeout(function () {
+        $ul.style.transition = '0ms';
+        $ul.style.transform =
+          'translate3d(+' + slideWidth * (slideLen - 10) + 'px, 0px, 0px)';
+      }, slideSpeed);
+      curIndex = slideLen - 10;
+    }
+
+    curSlide.forEach((a) => {
+      a.classList.remove('slide_active');
+    });
+
+    let temp = curIndex;
+    curSlide = [
+      $item[temp - 1],
+      $item[temp - 2],
+      $item[temp - 3],
+      $item[temp - 4],
+      $item[temp - 5],
+    ];
+    curIndex -= 5;
+    curSlide.forEach((a) => {
+      a.classList.add('slide_active');
+    });
+  });
 }
 
 // 영화 > 순위 영화 리스트

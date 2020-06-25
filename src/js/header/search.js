@@ -1,11 +1,5 @@
 import none from '../api/tmdb';
 
-async function init() {
-  let test = await none().searchAll('무한도전');
-  console.log(test);
-}
-init();
-
 const $navigationList = document.querySelector('.navigation-list');
 const $navigationListItem = document.querySelector('navigation-list > li');
 const $searchFormContainer = document.querySelector('.search-form-container');
