@@ -66,6 +66,7 @@ export default function tmdbApi() {
     let fullUrl = `${BASEURL}/search/multi?${APIKEY}${LANGUAGE}&query=${query}&page=1&include_adult=false${REGION}`;
     let getEpList = await fetch(fullUrl);
     getEpList = await getEpList.json().then((list) => list.results);
+    console.log(query);
 
     return getEpList[0];
   }
