@@ -2,8 +2,6 @@
 import tmdb from '../api/tmdb';
 
 // DOMs
-const $tvShowList = document.querySelector('.main-tvShow-list ul');
-const $movieList = document.querySelector('.main-movie-list ul');
 const $rateTvShowList = document.querySelector('.rate-tvShow-list ul');
 const $popularTvShowList = document.querySelector('.popular-tvShow-list ul');
 const mainMovie = document.querySelector('.main-movie');
@@ -15,12 +13,10 @@ const $prevBtn = document.querySelector('.prev-btn');
 const $nextBtn = document.querySelector('.next-btn');
 
 // stats
-let sliderWrapper;
-let sliderContainer;
+let slideWrapper;
+let slideContainer;
 let slideList;
-let slideCount;
-const slideWidth = 280;
-const slideSpeed = 300;
+let slideLen;
 
 // 장르 리스트
 const genresList = [
@@ -155,34 +151,33 @@ function getGenre(movie) {
   return nameArr;
 }
 
-let curIndex = 0;
-let curSlide;
-
 // 슬라이드
-function slide(listContent, btn) {
-  sliderWrapper = listContent;
-  sliderContainer = sliderWrapper.querySelector('ul'); // slideList
-  slideList = sliderWrapper.querySelectorAll('li.item'); // slideContents
-  slideCount = slideList.length;
+function slide(listContent) {
+  // console.log('div', listContent);
+  slideWrapper = listContent;
+  slideContainer = slideWrapper.querySelector('ul'); // slideList
+  slideList = slideWrapper.querySelectorAll('li.item'); // slideContents
+  slideLen = slideList.length;
 
-  sliderContainer.style.width = `${slideWidth * slideCount}px`;
-  curSlide = slideList[curIndex]; // current slide dom
-  
-  console.log(curSlide);
+  const slideWidth = 280;
+  const slideSpeed = 300;
 
-  // console.log(slideWidth);
-  if (btn.matches('.prev-btn')) {
-    // prev
-    console.log('prev');
+  slideContainer.style.width = `${slideWidth * (slideLen)}px`;
 
-  } else {
-    // next
-    if (curIndex <= slideCount - 1) {
-      // sliderContainer.style.transition = `${slideSpeed}ms`;
-      sliderContainer.style.left = `-${slideWidth * (curIndex + 1)}px`;
+  let curIndex = 0;
+  let curSlide = slideList[curIndex];
+
+  $nextBtn.addEventListener('click', () => {
+    if (curIndex < slideLen - 1) {
+      slideContainer.style.transition = `${slideSpeed}ms`;
+      slideContainer.style.left = `-${slideWidth * (curIndex + 1)}px`;
+    } else {
+      slideContainer.style.left = '0px';
+      curIndex = -1;
     }
     curSlide = slideList[++curIndex];
-  }
+  });
+
 }
 
 // 티비 프로그램 > 순위 티비 프로그램 리스트
@@ -194,11 +189,11 @@ async function renderRatedTv() {
 
   let listHtml = '';
 
-  tvShowsList.forEach((tvshow) => {
+  tvShowsList.forEach(tvshow => {
     if (tvshow.backdrop_path) {
       listHtml += `<li class="item">
       <div class="bob-container">
-        <img alt="${tvshow.title}"
+        <img alt="${tvshow.name}"
         src="${IMAGEURL}/w${WIDTH}${tvshow.backdrop_path}">
         <div class="bob-overview-wapper">
           <button type="button" class="play-btn icon-play">                 
@@ -239,10 +234,13 @@ async function renderRatedTv() {
   });
   $rateTvShowList.innerHTML = listHtml;
 
-  $controls.onclick = ({ target }) => {
-    sliderWrapper = target.parentNode.parentNode;
-    slide(sliderWrapper, target);
-  };
+  // $controls.onclick = ({ target }) => {
+  //   slideWrapper = target.parentNode.parentNode;
+  //   slide(slideWrapper, target);
+  // };
+  slideWrapper = $rateTvShowList.parentNode;
+  slide(slideWrapper);
+  // return slideList;
 }
 
 // 티비 프로그램 > 인기 티비 프로그램 리스트
