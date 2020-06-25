@@ -275,18 +275,6 @@ async function searchList(e) {
 
   test1MyList.innerHTML = html;
 }
-function move() {
-  test1MyList.style.transform = `translate3D(${100}px, 0, 0)`;
-}
-function moveToPrev() {
-  console.log('prev');
-
-  move();
-}
-function moveToNext() {
-  console.log('next');
-  move();
-}
 
 function gHome() {}
 const prev = document.querySelector('.carousel-control.prev');
