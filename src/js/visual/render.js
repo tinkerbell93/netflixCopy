@@ -277,16 +277,12 @@ async function searchList(e) {
 }
 
 function gHome() {}
-const prev = document.querySelector('.carousel-control.prev');
-const next = document.querySelector('.carousel-control.next');
 
 async function init() {
   await render();
   addListBtn.addEventListener('click', addList);
   logo.addEventListener('click', gHome);
   myList.addEventListener('click', searchList);
-  prev.addEventListener('click', moveToPrev);
-  next.addEventListener('click', moveToNext);
 }
 
 init();
