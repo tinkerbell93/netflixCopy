@@ -6,7 +6,6 @@ async function init() {
 }
 init();
 
-
 const $navigationList = document.querySelector('.navigation-list');
 const $navigationListItem = document.querySelector('navigation-list > li');
 const $searchFormContainer = document.querySelector('.search-form-container');
