@@ -1,6 +1,6 @@
 // 리스트 레이아웃
 main {
-  width: 90vw;
+  // width: 90vw;
   margin: 0 auto;
 }
 main > section {
@@ -20,24 +20,26 @@ main h3 button{
 }
 .item-wrapper > ul {
   display: flex;
+  position: relative;
+  top: 0;
+  margin-left: 30px;
+  transition: all 0.3s;
 }
 .item-wrapper > ul::after {
   display: block;
   content: '';
   clear: both;
 }
-.item-wrapper li {
+.item-wrapper .item {
   position: relative;
-  // width: 200px;
-  // float: left;
 }
 .bob-container{
-  // width: 80%;
-  transform: scale(0.8);
+  transform: scale(0.9);
   transition: all .3s;
 }
 .bob-container > img {
-  width: 100%;
+  // width: 100%;
+  width: 280px;
 }
 .bob-container div,
 .bob-container .detail-btn {
@@ -63,6 +65,7 @@ main h3 button{
   position: absolute;
   left: 10px;
   bottom: 30px;
+  width: 80%;
 }
 .bob-container .play-btn {
   width: 27px;
@@ -98,15 +101,34 @@ main h3 button{
 // 버튼
 .controls button {
   position: absolute;
-  top: 0;
+  top: 31px;
   width: 30px;
-  height: 100px;
+  height: 147px;
+  padding: 0;
+  font-size: 20px;
   color: #fff;
-  background-color: #ddd;
+  background-color: rgba(37, 37, 37, 0.82);
 }
 .controls .prev-btn {
   left: 0;
 }
 .controls .next-btn {
   right: 0;
+}
+
+// 인디케이트
+.slide-dot { 
+  display: flex;
+  position: absolute;
+  top: 18px;
+  right: 35px;
+}
+.slide-dot li {
+  width: 15px;
+  height: 2px;
+  margin-left: 3px;
+  background-color: #4d4d4d;
+}
+.slide-dot li.active{
+  background-color: #aaa;
 }

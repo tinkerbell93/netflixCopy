@@ -7,6 +7,7 @@
     content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="./fontello-d9d38057/css/fontello-embedded.css">
+  <link rel="icon" href="img/Netflix.svg">
   <script defer src="../dist/js/bundle.js"></script>
   <title>Netflix</title>
 </head>
@@ -34,7 +35,7 @@
         <fieldset class="reset-box search-box">
           <legend>검색</legend>
           <label for="content-search"></label>
-          <input id="content-search" type="text" placeholder="Titles, people, genres" name="search">
+          <input id="content-search" type="search" placeholder="제목, 사람, 장르" name="search">
         </fieldset>
       </form>
     </div>
@@ -70,30 +71,36 @@
   </section> -->
 
     <!-- visual -->
-    <section>
-      <h3 class="main-item-title"></h3>
-      <div class="visual-details">
-        <p class="main-item-brief">
-       </p>
-        <!-- 관람연령 미정 -->
-        <div class="maturity-rating">15+</div>
-        <div class="link-wrapper">
-          <button type="button" class="play-btn icon-play">
-            <span>재생</span>
-          </button>
-          <button type="button" class="gray-btn infoMore-btn icon-info-circled-alt">
+   <!-- <section>-->
+<!--      <h3 class="main-item-title">사이코지만 괜찮아</h3>-->
+<!--      <div class="visual-details">-->
+<!--        <p class="main-item-brief">-->
+<!--          사랑따위, 못 느끼면 어때. 태어날 때부터 온기가 없는 동화작가.-->
+<!--          그녀가 사랑을 외면하는 정신 병동 보호사와 마주친다.-->
+<!--          이상하지만 꽤 괜찮은, 힐링 로맨틱 코미디.</p>-->
+<!--        &lt;!&ndash; 관람연령 미정 &ndash;&gt;-->
+<!--        <div class="maturity-rating">15+</div>-->
+<!--        <div class="link-wrapper">-->
+<!--          <button type="button" class="play-btn icon-play">-->
+<!--            <span>재생</span>-->
+<!--          </button>-->
+<!--          <button type="button" class="gray-btn infoMore-btn icon-info-circled-alt">-->
 
-            <span>상세 정보</span>
-          </button>
-        </div>
-        <div class="visual-wrapper">
-          <!--  		<img src="" alt="">-->
-          <!--  		&lt;!&ndash; 이미지 백그라운드 그라데이션을 위한 태그 &ndash;&gt;-->
-          <!--  		<div class="gradation-right"></div>-->
-          <!--  		<div class="gradation-bottom"></div>-->
-        </div>
-      </div>
-    </section>
+<!--            <span>상세 정보</span>-->
+<!--          </button>-->
+<!--        </div>-->
+<!--        <div class="visual-wrapper">-->
+<!--          &lt;!&ndash;  		<img src="" alt="">&ndash;&gt;-->
+<!--          &lt;!&ndash;  		&lt;!&ndash; 이미지 백그라운드 그라데이션을 위한 태그 &ndash;&gt;&ndash;&gt;-->
+<!--          &lt;!&ndash;  		<div class="gradation-right"></div>&ndash;&gt;-->
+<!--          &lt;!&ndash;  		<div class="gradation-bottom"></div>&ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </section> -->
+    <div class="loading-container">
+      <div class="loading"></div>
+      <div id="loading-text">loading</div>
+    </div>
   </section>
   
 <!--인포-->
@@ -177,50 +184,14 @@
   <main id="home">
     <h2 class="a11y-hidden">넷플릭스 콘텐츠</h2>
 
-    <!-- Main TV Shows -->
+    <!-- 순위 TV 프로그램 -->
     <section class="main-tvShow">
       <h3 class="main-tvShow-heading">
-        <button type="button" class="explore-btn">TV 프로그램<span>모두 보기</span></button>
+        TOP 20 TV 프로그램
       </h3>
-      <div class="slide-wrapper item-wrapper main-tvShow-list">
+      <div class="slide-wrapper item-wrapper rate-tvShow-list">
         <ul>
-          <!-- TV Shows -->
-          <!-- <li class="item">
-            <div class="bob-container">
-              <img alt="콘텐츠 제목"
-                src="#">
-              <div class="bob-overview-wapper">
-                <button type="button" class="play-btn icon-play">                 
-                  <span class="a11y-hidden">재생</span>
-                </button>
-                <h4 class="item-title">It's Okay to Not Be Okay</h4>
-                <ul>
-                  <li class="maturity-rating">
-                    15+
-                  </li>
-                  <li>
-                    Emotional Romantic Dramedy
-                  </li>
-                </ul>
-              </div>
-              <div class="bob-actions-wrapper">
-                <div class="thumbs-wrapper">
-                  <button type="button" class="like-btn icon-thumbs-up">                  
-                    <span class="a11y-hidden">좋아요</span>
-                  </button>
-                  <button type="button" class="dislike-btn icon-thumbs-down">                   
-                    <span class="a11y-hidden">싫어요</span>
-                  </button>
-                  <button type="button" class="myList-btn icon-plus">                   
-                    <span class="a11y-hidden">내가 찜한 콘텐츠</span>
-                  </button>
-                </div>
-              </div>
-              <button type="button" class="detail-btn">
-                <span class="a11y-hidden">상세 정보</span>
-              </button>
-            </div>
-          </li> -->
+          <!-- TV 프로그램 -->          
         </ul>
         <p class="controls">
           <button type="button" class="prev-btn icon-left-open">
@@ -240,50 +211,14 @@
       </section>
     </section>
 
-    <!-- Main Movies -->
-    <section class="main-movies">
-      <h3 class="main-movies-heading">
-        <button type="button" class="explore-btn">영화<span>모두 보기</span></button>
+    <!-- 인기 TV 프로그램 -->
+    <section class="main-tvShow">
+      <h3 class="main-tvShow-heading">
+        인기 TV 프로그램
       </h3>
-      <div class="slide-wrapper item-wrapper main-movie-list">
+      <div class="slide-wrapper item-wrapper popular-tvShow-list">
         <ul>
-          <!-- Movies -->
-          <!-- <li class="item">
-            <div class="bob-container">
-              <img alt="콘텐츠 제목"
-                src="#">
-              <div class="bob-overview-wapper">
-                <button type="button" class="play-btn icon-play">                  
-                  <span class="a11y-hidden">재생</span>
-                </button>
-                <h4 class="item-title">It's Okay to Not Be Okay</h4>
-                <ul>
-                  <li class="maturity-rating">
-                    15+
-                  </li>
-                  <li>
-                    Emotional Romantic Dramedy
-                  </li>
-                </ul>
-              </div>
-              <div class="bob-actions-wrapper">
-                <div class="thumbs-wrapper">
-                  <button type="button" class="like-btn icon-thumbs-up">                   
-                    <span class="a11y-hidden">좋아요</span>
-                  </button>
-                  <button type="button" class="dislike-btn icon-thumbs-down">                    
-                    <span class="a11y-hidden">싫어요</span>
-                  </button>
-                  <button type="button" class="myList-btn icon-plus">                   
-                    <span class="a11y-hidden">내가 찜한 콘텐츠</span>
-                  </button>
-                </div>
-              </div>
-              <button type="button" class="detail-btn">
-                <span class="a11y-hidden">상세 정보</span>
-              </button>
-            </div>
-          </li> -->
+          <!-- TV 프로그램 -->          
         </ul>
         <p class="controls">
           <button type="button" class="prev-btn icon-left-open">
@@ -299,8 +234,60 @@
         <li></li>
         <li></li>
       </ul>
+      <section class="infoMore">
+      </section>
+    </section>
 
-      <!-- 인포: 해당콘텐츠 클릭시 출력될 영역 -->
+    <!-- 순위 영화 -->
+    <section class="main-movie">
+      <h3 class="main-movie-heading">
+        TOP 20 영화
+      </h3>
+      <div class="slide-wrapper item-wrapper rate-Movie-list">
+        <ul>
+          <!-- 영화 리스트-->          
+        </ul>
+        <p class="controls">
+          <button type="button" class="prev-btn icon-left-open">
+            <span class="a11y-hidden">이전</span>
+          </button>
+          <button type="button" class="next-btn icon-right-open">
+            <span class="a11y-hidden">다음</span>
+          </button>
+        </p>
+      </div>
+      <ul class="slide-dot">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+      </ul>
+      <section class="infoMore">
+      </section>
+    </section>
+
+    <!-- 인기 영화 -->
+    <section class="main-movie">
+      <h3 class="main-movie-heading">
+        인기 영화
+      </h3>
+      <div class="slide-wrapper item-wrapper popular-movie-list">
+        <ul>
+          <!-- 영화 리스트 -->
+        </ul>
+        <p class="controls">
+          <button type="button" class="prev-btn icon-left-open">
+            <span class="a11y-hidden">이전</span>
+          </button>
+          <button type="button" class="next-btn icon-right-open">
+            <span class="a11y-hidden">다음</span>
+          </button>
+        </p>
+      </div>
+      <ul class="slide-dot">
+        <li class="active"></li>
+        <li></li>
+        <li></li>
+      </ul>
       <section class="infoMore">
       </section>
     </section>
@@ -308,7 +295,7 @@
     <!-- Main My List -->
     <section class="main-myList">
       <h3 class="main-myList-heading">
-        <button type="button" class="explore-btn">내가 찜한 콘텐츠<span>모두 보기</span></button>
+        내가 찜한 콘텐츠
       </h3>
       <div class="slide-wrapper item-wrapper main-myList-list">
         <ul>
@@ -371,268 +358,6 @@
       </ul>
 
       <!-- 인포: 해당콘텐츠 클릭시 출력될 영역 -->
-      <section class="infoMore">
-      </section>
-    </section>
-  </main>
-
-  <!-- TV shows로 진입하면 render 되는 화면 -->
-  <main id="tvShows">
-    <h2 class="a11y-hidden">TV 프로그램 콘텐츠</h2>
-
-    <!-- 순위 TV Shows -->
-    <section class="main-tvShow">
-      <h3 class="main-tvShow-heading">
-        TOP 20 TV 프로그램
-      </h3>
-      <div class="slide-wrapper item-wrapper rate-tvShow-list">
-        <ul>
-          <!-- TV Shows -->
-          <!-- <li class="item">
-            <div class="bob-container">
-              <img alt="콘텐츠 제목"
-                src="#">
-              <div class="bob-overview-wapper">
-                <button type="button" class="play-btn icon-play">                 
-                  <span class="a11y-hidden">재생</span>
-                </button>
-                <h4 class="item-title">It's Okay to Not Be Okay</h4>
-                <ul>
-                  <li class="maturity-rating">
-                    15+
-                  </li>
-                  <li>
-                    Emotional Romantic Dramedy
-                  </li>
-                </ul>
-              </div>
-              <div class="bob-actions-wrapper">
-                <div class="thumbs-wrapper">
-                  <button type="button" class="like-btn icon-thumbs-up">                  
-                    <span class="a11y-hidden">좋아요</span>
-                  </button>
-                  <button type="button" class="dislike-btn icon-thumbs-down">                   
-                    <span class="a11y-hidden">싫어요</span>
-                  </button>
-                  <button type="button" class="myList-btn icon-plus">                   
-                    <span class="a11y-hidden">내가 찜한 콘텐츠</span>
-                  </button>
-                </div>
-              </div>
-              <button type="button" class="detail-btn">
-                <span class="a11y-hidden">상세 정보</span>
-              </button>
-            </div>
-          </li> -->
-        </ul>
-        <p class="controls">
-          <button type="button" class="prev-btn icon-left-open">
-            <span class="a11y-hidden">이전</span>
-          </button>
-          <button type="button" class="next-btn icon-right-open">
-            <span class="a11y-hidden">다음</span>
-          </button>
-        </p>
-      </div>
-      <ul class="slide-dot">
-        <li class="active"></li>
-        <li></li>
-        <li></li>
-      </ul>
-      <section class="infoMore">
-      </section>
-    </section>
-
-    <!-- 인기 TV Shows -->
-    <section class="main-tvShow">
-      <h3 class="main-tvShow-heading">
-        인기 TV 프로그램
-      </h3>
-      <div class="slide-wrapper item-wrapper popular-tvShow-list">
-        <ul>
-          <!-- TV Shows -->
-          <!-- <li class="item">
-            <div class="bob-container">
-              <img alt="콘텐츠 제목"
-                src="#">
-              <div class="bob-overview-wapper">
-                <button type="button" class="play-btn icon-play">                 
-                  <span class="a11y-hidden">재생</span>
-                </button>
-                <h4 class="item-title">It's Okay to Not Be Okay</h4>
-                <ul>
-                  <li class="maturity-rating">
-                    15+
-                  </li>
-                  <li>
-                    Emotional Romantic Dramedy
-                  </li>
-                </ul>
-              </div>
-              <div class="bob-actions-wrapper">
-                <div class="thumbs-wrapper">
-                  <button type="button" class="like-btn icon-thumbs-up">                  
-                    <span class="a11y-hidden">좋아요</span>
-                  </button>
-                  <button type="button" class="dislike-btn icon-thumbs-down">                   
-                    <span class="a11y-hidden">싫어요</span>
-                  </button>
-                  <button type="button" class="myList-btn icon-plus">                   
-                    <span class="a11y-hidden">내가 찜한 콘텐츠</span>
-                  </button>
-                </div>
-              </div>
-              <button type="button" class="detail-btn">
-                <span class="a11y-hidden">상세 정보</span>
-              </button>
-            </div>
-          </li> -->
-        </ul>
-        <p class="controls">
-          <button type="button" class="prev-btn icon-left-open">
-            <span class="a11y-hidden">이전</span>
-          </button>
-          <button type="button" class="next-btn icon-right-open">
-            <span class="a11y-hidden">다음</span>
-          </button>
-        </p>
-      </div>
-      <ul class="slide-dot">
-        <li class="active"></li>
-        <li></li>
-        <li></li>
-      </ul>
-      <section class="infoMore">
-      </section>
-    </section>
-  </main>
-
-  <!-- Movies로 진입하면 render 되는 화면 -->
-  <main id="Movies">
-    <h2 class="a11y-hidden">영화 콘텐츠</h2>
-
-    <!-- 순위 Movie -->
-    <section class="main-movie">
-      <h3 class="main-movie-heading">
-        TOP 20 영화
-      </h3>
-      <div class="slide-wrapper item-wrapper rate-Movie-list">
-        <ul>
-          <!-- Movie -->
-          <!-- <li class="item">
-            <div class="bob-container">
-              <img alt="콘텐츠 제목"
-                src="#">
-              <div class="bob-overview-wapper">
-                <button type="button" class="play-btn icon-play">                 
-                  <span class="a11y-hidden">재생</span>
-                </button>
-                <h4 class="item-title">It's Okay to Not Be Okay</h4>
-                <ul>
-                  <li class="maturity-rating">
-                    15+
-                  </li>
-                  <li>
-                    Emotional Romantic Dramedy
-                  </li>
-                </ul>
-              </div>
-              <div class="bob-actions-wrapper">
-                <div class="thumbs-wrapper">
-                  <button type="button" class="like-btn icon-thumbs-up">                  
-                    <span class="a11y-hidden">좋아요</span>
-                  </button>
-                  <button type="button" class="dislike-btn icon-thumbs-down">                   
-                    <span class="a11y-hidden">싫어요</span>
-                  </button>
-                  <button type="button" class="myList-btn icon-plus">                   
-                    <span class="a11y-hidden">내가 찜한 콘텐츠</span>
-                  </button>
-                </div>
-              </div>
-              <button type="button" class="detail-btn">
-                <span class="a11y-hidden">상세 정보</span>
-              </button>
-            </div>
-          </li> -->
-        </ul>
-        <p class="controls">
-          <button type="button" class="prev-btn icon-left-open">
-            <span class="a11y-hidden">이전</span>
-          </button>
-          <button type="button" class="next-btn icon-right-open">
-            <span class="a11y-hidden">다음</span>
-          </button>
-        </p>
-      </div>
-      <ul class="slide-dot">
-        <li class="active"></li>
-        <li></li>
-        <li></li>
-      </ul>
-      <section class="infoMore">
-      </section>
-    </section>
-
-    <!-- 인기 Movie -->
-    <section class="main-movie">
-      <h3 class="main-movie-heading">
-        인기 Movie
-      </h3>
-      <div class="slide-wrapper item-wrapper popular-movie-list">
-        <ul>
-          <!-- Movie -->
-          <!-- <li class="item">
-            <div class="bob-container">
-              <img alt="콘텐츠 제목"
-                src="#">
-              <div class="bob-overview-wapper">
-                <button type="button" class="play-btn icon-play">                 
-                  <span class="a11y-hidden">재생</span>
-                </button>
-                <h4 class="item-title">It's Okay to Not Be Okay</h4>
-                <ul>
-                  <li class="maturity-rating">
-                    15+
-                  </li>
-                  <li>
-                    Emotional Romantic Dramedy
-                  </li>
-                </ul>
-              </div>
-              <div class="bob-actions-wrapper">
-                <div class="thumbs-wrapper">
-                  <button type="button" class="like-btn icon-thumbs-up">                  
-                    <span class="a11y-hidden">좋아요</span>
-                  </button>
-                  <button type="button" class="dislike-btn icon-thumbs-down">                   
-                    <span class="a11y-hidden">싫어요</span>
-                  </button>
-                  <button type="button" class="myList-btn icon-plus">                   
-                    <span class="a11y-hidden">내가 찜한 콘텐츠</span>
-                  </button>
-                </div>
-              </div>
-              <button type="button" class="detail-btn">
-                <span class="a11y-hidden">상세 정보</span>
-              </button>
-            </div>
-          </li> -->
-        </ul>
-        <p class="controls">
-          <button type="button" class="prev-btn icon-left-open">
-            <span class="a11y-hidden">이전</span>
-          </button>
-          <button type="button" class="next-btn icon-right-open">
-            <span class="a11y-hidden">다음</span>
-          </button>
-        </p>
-      </div>
-      <ul class="slide-dot">
-        <li class="active"></li>
-        <li></li>
-        <li></li>
-      </ul>
       <section class="infoMore">
       </section>
     </section>

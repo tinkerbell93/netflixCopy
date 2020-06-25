@@ -10,12 +10,12 @@ const logo = document.querySelector('.logo');
 // 찜 목록 이동
 const myList = document.querySelector('.myList');
 // visualDetails DOMs
-const mainVisual = document.querySelector('.main-visual');
-const mainItemTitle = document.querySelector('.main-item-title');
-const visualWrapper = document.querySelector('.visual-wrapper');
-const visualDetails = document.querySelector('.visual-details');
-const mainItemBrief = visualDetails.querySelector('.main-item-brief');
-const infoMoreBtn = document.querySelector('.infoMore-btn');
+// const mainVisual = document.querySelector('.main-visual');
+// const mainItemTitle = document.querySelector('.main-item-title');
+// const visualWrapper = document.querySelector('.visual-wrapper');
+// const visualDetails = document.querySelector('.visual-details');
+// const mainItemBrief = visualDetails.querySelector('.main-item-brief');
+// const infoMoreBtn = document.querySelector('.infoMore-btn');
 // visualDetails DOMs end
 // info DOMs
 const infoMore = document.querySelector('.infoMore');
@@ -72,7 +72,10 @@ async function getContentImage() {
 
 // main-visual render
 async function render() {
+  const loadingContainer = document.querySelector('.loading-container');
+  const mainVisual = document.querySelector('.main-visual');
   // state set
+  let html = '';
   content = await getMainContent();
   contentTitle = content.title ? content.title : content.name;
 
@@ -83,20 +86,40 @@ async function render() {
     contentBrief = temp[0] + '.';
   }
 
+  contentImage = await getContentImage();
+  mainVisual.innerHTML = `
+  <section>
+    <h3 class="main-item-title">${contentTitle}</h3>
+    <div class="visual-details">
+      <p class="main-item-brief">
+        ${contentBrief}
+      </p>
+      <div class="maturity-rating">${content.adult ? '성인 전용' : ''}</div>
+      <div class="link-wrapper">
+        <button type="button" class="play-btn icon-play">
+          <span>재생</span>
+        </button>
+        <button type="button" class="gray-btn infoMore-btn icon-info-circled-alt">
+          <span>상세 정보</span>
+        </button>
+      </div>
+      <div class="visual-wrapper">
+      </div>
+    </div>
+  </section> 
+`;
   if (content.adult !== undefined || content.adult !== false)
     document.querySelector('.maturity-rating').style.opacity = 0;
-
-  contentImage = await getContentImage();
-
-  // DOM change
-  mainItemTitle.textContent = contentTitle;
-  mainItemBrief.textContent = contentBrief;
+  const visualWrapper = document.querySelector('.visual-wrapper');
   visualWrapper.style.backgroundImage = `linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0) 70px, rgba(20, 20, 20, 1) 90vh), url(${contentImage[0]})`;
+  const infoMoreBtn = document.querySelector('.infoMore-btn');
+  infoMoreBtn.addEventListener('click', infoOverview);
 }
 // main-visual render end
 
 // info
 async function infoOverview() {
+  const mainVisual = document.querySelector('.main-visual');
   mainVisual.style.display = 'none';
   infoMore.style.display = 'block';
   // year
@@ -271,7 +294,6 @@ const next = document.querySelector('.carousel-control.next');
 
 async function init() {
   await render();
-  infoMoreBtn.addEventListener('click', infoOverview);
   addListBtn.addEventListener('click', addList);
   logo.addEventListener('click', gHome);
   myList.addEventListener('click', searchList);

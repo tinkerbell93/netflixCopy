@@ -66,8 +66,6 @@ export default function tmdbApi() {
     let fullUrl = `${BASEURL}/search/multi?${APIKEY}${LANGUAGE}&query=${query}&page=1&include_adult=false${REGION}`;
     let getEpList = await fetch(fullUrl);
     getEpList = await getEpList.json().then((list) => list.results);
-    console.log(query);
-
     return getEpList[0];
   }
   // 티비 에피소드
@@ -99,7 +97,6 @@ export default function tmdbApi() {
     getList = await fetch(fullUrl);
 
     temp = await getList.json().then((list) => list.genres);
-
     getGnere = [...getGnere, ...temp];
     getGnere = getGnere.filter((thing, index) => {
       return (
@@ -111,7 +108,6 @@ export default function tmdbApi() {
     });
     return getGnere;
   }
-
   async function detailMovie(id) {
     let fullUrl = `${BASEURL}/${MOVIE}/${id}?${APIKEY}${LANGUAGE}`;
     let movieDetail = {};
@@ -126,7 +122,6 @@ export default function tmdbApi() {
     tvDetail = await getDetail.json().then((list) => list);
     return tvDetail;
   }
-
   // 배우
   async function castMovie(id) {
     let fullUrl = `${BASEURL}/${MOVIE}/${id}/credits?${APIKEY}${LANGUAGE}`;
@@ -181,10 +176,8 @@ export default function tmdbApi() {
     castTv,
   };
 }
-
 // async function init() {
 //   let test = tmdbApi();
 //   console.log(await test.searchAll('무한도전'));
 // }
-
 // init();
