@@ -146,6 +146,7 @@ function getGenre(movie) {
 }
 
 // 순위 티비 프로그램 리스트
+// 마리님 여기 확인해주세요!!!!!!!!!!!!!!!!!!!
 async function renderRatedTv() {
 
   // state
