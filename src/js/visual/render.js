@@ -277,8 +277,6 @@ async function searchList(e) {
 }
 
 function gHome() {}
-const prev = document.querySelector('.carousel-control.prev');
-const next = document.querySelector('.carousel-control.next');
 
 async function init() {
   await render();
