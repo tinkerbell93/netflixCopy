@@ -137,14 +137,14 @@ function getGenre(movie) {
 
   function matchGenre(id) {
     let genreName = '';
-    genresList.forEach((genre) => {
+    genresList.forEach(genre => {
       genre.id === id ? (genreName = genre.name) : '';
     });
     return genreName;
   }
 
   let nameArr = [];
-  genreIds.forEach((id) => {
+  genreIds.forEach(id => {
     nameArr = [...nameArr, matchGenre(id)];
   });
 
@@ -159,25 +159,44 @@ function slide(listContent) {
   slideList = slideWrapper.querySelectorAll('li.item'); // slideContents
   slideLen = slideList.length;
 
+  // const listwidth = 280;
   const slideWidth = 280;
   const slideSpeed = 300;
+  const startNum = 0;
 
-  slideContainer.style.width = `${slideWidth * (slideLen)}px`;
+  slideContainer.style.width = `${slideWidth * (slideLen + 2)}px`;
 
-  let curIndex = 0;
+  // Copy first, last slide
+  const firstChild = slideContainer.firstElementChild;
+  const lastChild = slideContainer.lastElementChild;
+  const cloneFirst = firstChild.cloneNode(true);
+  const cloneLast = lastChild.cloneNode(true);
+
+  // Add copied Slides
+  slideContainer.appendChild(cloneFirst);
+  slideContainer.insertBefore(cloneLast, slideContainer.firstElementChild);
+
+  slideContainer.style.left = `-${slideWidth * (startNum + 1)}px`;
+
+  let curIndex = startNum;
   let curSlide = slideList[curIndex];
+  curSlide.classList.add('slide-active');
 
   $nextBtn.addEventListener('click', () => {
     if (curIndex < slideLen - 1) {
       slideContainer.style.transition = `${slideSpeed}ms`;
-      slideContainer.style.left = `-${slideWidth * (curIndex + 1)}px`;
-    } else {
-      slideContainer.style.left = '0px';
+      slideContainer.style.left = `-${slideWidth * (curIndex + 2) * 5}px`;
+    } else if (curIndex === slideLen - 1) {
+      setTimeout(() => {
+        slideContainer.style.left = '0px';
+        slideContainer.style.left = `-${slideWidth}px`;
+      }, slideSpeed);
       curIndex = -1;
     }
+    curSlide.classList.remove('slide-active');
     curSlide = slideList[++curIndex];
+    curSlide.classList.add('slide-active');
   });
-
 }
 
 // 티비 프로그램 > 순위 티비 프로그램 리스트
@@ -203,7 +222,7 @@ async function renderRatedTv() {
           <h4 class="item-title">${tvshow.name}</h4>
           <ul>
             <li class="maturity-rating">
-              ${tvshow.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
+              ${tvshow.adult ? '청소년 관람 불가' : ''}
             </li>
             <li>
             ${getGenre(tvshow)}
@@ -252,7 +271,7 @@ async function renderpopularTv() {
 
   let listHtml = '';
 
-  tvShowList.forEach((tvshow) => {
+  tvShowList.forEach(tvshow => {
     if (tvshow.backdrop_path) {
       listHtml += `<li class="item">
                   <div class="bob-container">
@@ -266,11 +285,7 @@ async function renderpopularTv() {
                       <h4 class="item-title">${tvshow.name}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${
-                            tvshow.adult
-                              ? '청소년 관람 불가'
-                              : '모든 연령 관람 가능'
-                          }
+                          ${tvshow.adult ? '청소년 관람 불가' : ''}
                         </li>
                         <li>
                           ${getGenre(tvshow)}
@@ -311,7 +326,7 @@ async function renderRateMovie() {
 
   let listHtml = '';
 
-  moviesList.forEach((movie) => {
+  moviesList.forEach(movie => {
     if (movie.backdrop_path) {
       listHtml += `<li class="item">
                   <div class="bob-container">
@@ -325,11 +340,7 @@ async function renderRateMovie() {
                       <h4 class="item-title">${movie.title}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${
-                            movie.adult
-                              ? '청소년 관람 불가'
-                              : '모든 연령 관람 가능'
-                          }
+                          ${movie.adult ? '청소년 관람 불가' : ''}
                         </li>
                         <li>
                           ${getGenre(movie)}
@@ -371,7 +382,7 @@ async function renderpopularMovie() {
 
   let listHtml = '';
 
-  moviesList.forEach((movie) => {
+  moviesList.forEach(movie => {
     if (movie.backdrop_path) {
       listHtml += `<li class="item">
                   <div class="bob-container">
@@ -385,11 +396,7 @@ async function renderpopularMovie() {
                       <h4 class="item-title">${movie.title}</h4>
                       <ul>
                         <li class="maturity-rating">
-                          ${
-                            movie.adult
-                              ? '청소년 관람 불가'
-                              : '모든 연령 관람 가능'
-                          }
+                          ${movie.adult ? '청소년 관람 불가' : ''}
                         </li>
                         <li>
                           ${getGenre(movie)}

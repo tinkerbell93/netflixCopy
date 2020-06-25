@@ -14,8 +14,6 @@ const $searchForm = document.querySelector('.search-form');
 const $searchBox = document.querySelector('.search-box');
 const $contentSearch = document.getElementById('content-search');
 
-console.log('hello');
-
 // 네비게이션 클릭 시 네비 폰트 굵어지는 이벤트
 $navigationList.onclick = ({ target }) => {
   if (!target.matches('.navigation-list a')) return;
@@ -24,11 +22,13 @@ $navigationList.onclick = ({ target }) => {
 
 // 돋보기 버튼 클릭 시 input 박스 애니메이션 효과
 $iconSearch.onclick = () => {
-  $searchForm.classList.add('active');
-  $iconSearch.classList.add('active');
-  $contentSearch.classList.add('active');
+  $searchFormContainer.classList.add('active');
+  $contentSearch.focus();
 };
 
-console.log($searchFormContainer.querySelectorAll('.active'));
-// $contentSearch.focus();
-// $contentSearch.select();
+// 포커스가 빠지면 서치박스 닫힘
+$contentSearch.onblur = e => {
+  if($contentSearch.value !== '') return;
+  $searchFormContainer.classList.remove('active');
+};
+
