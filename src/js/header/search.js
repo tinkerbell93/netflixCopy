@@ -1,11 +1,3 @@
-import none from '../api/tmdb'
-
-async function init(){
-  let test = await none().searchAll('무한도전')
-  console.log(test);
-  
-}
-init()
 
 const $navigationList = document.querySelector('.navigation-list');
 const $navigationListItem = document.querySelector('navigation-list > li');
@@ -15,7 +7,7 @@ const $searchForm = document.querySelector('.search-form');
 const $searchBox = document.querySelector('.search-box');
 const $contentSearch = document.getElementById('content-search');
 
-console.log('hello');
+console.log('hi');
 
 // 네비게이션 클릭 시 네비 폰트 굵어지는 이벤트
 $navigationList.onclick = ({ target }) => {
