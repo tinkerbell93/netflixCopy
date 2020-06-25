@@ -1,17 +1,16 @@
 .header {
-  // width: 90vw;
   width: 100%;
   height: 70px;
   margin: 0 auto;
   display: flex;
   align-items: center;
-  // position: relative;
   position: fixed;
   top: 0;
   left: 0;
   padding-left: 50px;
-  background-color: black;
+  background-color: transparent;
   z-index: 1000;
+  transition: background-color .5s;
 }
 
 .logo {
@@ -88,12 +87,6 @@
     transform: translateY(-50%);
     font-size: 20px;
     z-index: 10;
-
-    // &.active {
-    //   transform: translate(-280px, -50%);
-    //   transition: all .4s;
-    // }
-
   }
 
   .search-form {
@@ -102,11 +95,6 @@
     margin-left: auto;
     position: absolute;
     right: 10px;
-
-    // &.active {
-    //   width: 100%;
-    //   transition: all .3s;
-    // }
 
     .search-box {
       padding: 10px 20px 10px 10px;
@@ -122,14 +110,6 @@
         border: 0;
         padding: 0;
         opacity: 0;
-
-        // &.active {
-        //   padding-left: 40px;
-        //   border: 1px solid white;
-        //   opacity: 1;
-        //   transition: border .5s;
-        //   transition: opacity .5s;
-        // }
       }
 
       // #content-search::-webkit-search-cancel-button {
