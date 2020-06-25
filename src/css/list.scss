@@ -8,6 +8,10 @@ main > section {
   position: relative;
 }
 // 리스트 헤딩
+main h3 {
+  margin-left: 30px;
+  font-size: 13px;
+}
 main h3 button{
   color: #fff;
   outline: 0;
@@ -16,7 +20,6 @@ main h3 button{
 
 // 리스트 아이템
 .item-wrapper {
-  width: 6000px;
 }
 .item-wrapper > ul {
   display: flex;
@@ -33,31 +36,46 @@ main h3 button{
 .item-wrapper .item {
   position: relative;
 }
-.bob-container{
-  transform: scale(0.9);
+.bob-container {
+  transform: scale(0.7);
   transition: all .3s;
+  margin-left: -45px;
+  margin-right: -45px;
+}
+.bob-container::before {
+  content: '';
+  background-image: linear-gradient(to left, rgba(20, 20, 20, 0.7), rgba(0, 0, 0, 0) 0px, #141414 120vh);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 90%;
+  height: 100%;
 }
 .bob-container > img {
-  // width: 100%;
-  width: 280px;
+  width: 350px;
+  height: 197px;
 }
 .bob-container div,
 .bob-container .detail-btn {
-  // visibility: hidden;
+  visibility: hidden;
 }
 .bob-container:hover div,
 .bob-container:hover .detail-btn {
   visibility: visible;
 }
 .bob-container:hover {
-  // width: 100%;
   transform: scale(1);
+  margin: 0;
+}
+.bob-container:hover > img {
+  // height: 280px;
 }
 
 // 리스트 아이템 버튼 
 .bob-container button {
   padding: 5px;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 // 리스트 아이템 왼쪽 영역
@@ -70,7 +88,11 @@ main h3 button{
 .bob-container .play-btn {
   width: 27px;
   height: 27px;
+  margin-bottom: 5px;
   background-color: rgba(255, 255, 255, 0.5);
+}
+.bob-container .play-btn::before {
+  padding-left: 2px;
 }
 
 // 리스트 아이템 오른쪽 영역
@@ -79,24 +101,28 @@ main h3 button{
   right: 10px;
   bottom: 30px;
 }
-.thumbs-wrapper button {
+.bob-actions-wrapper .thumbs-wrapper button {
   display: block;
-  width: 23px;
-  height: 23px;
-  border: 1px solid #fff;
+  margin-bottom: 3px;
+  width: 27px;
+  height: 27px;
+  color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(16, 16, 16, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+}
+.bob-actions-wrapper .thumbs-wrapper button::before {
+  margin: 0;
 }
 
 // 리스트 아이템 상세정보 버튼
 .bob-container .detail-btn {
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: 5px;
   width: 100%;
-  height: 2px;
-  background-color: red;
   border-radius: 0;
+  color: #fff;
 }
-
 // 슬라이드
 // 버튼
 .controls button {
