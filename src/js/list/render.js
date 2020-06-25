@@ -9,6 +9,16 @@ const $popularTvShowList = document.querySelector('.popular-tvShow-list ul');
 const mainMovie = document.querySelector('.main-movie');
 const $rateMovieList = mainMovie.querySelector('.rate-Movie-list > ul');
 const $popularMovieList = document.querySelector('.popular-movie-list ul');
+// 슬라이드
+const $controls = document.querySelector('.controls');
+const $prevBtn = document.querySelector('.prev-btn');
+const $nextBtn = document.querySelector('.next-btn');
+
+// stats
+let sliderWrapper;
+let sliderContainer;
+let slideList;
+let slideCount;
 
 // 장르 리스트
 const genresList = [
@@ -143,6 +153,20 @@ function getGenre(movie) {
   return nameArr;
 }
 
+// 슬라이드
+function slide(listContent) {
+  // 슬라이드
+  sliderWrapper = listContent;
+  sliderContainer = listContent.querySelector('ul');
+  const $sliderWrapper = document.querySelector('.slide-wrapper');
+  const $sliderContainer = document.querySelector('.slide-wrapper > ul');
+  const slides = document.getElementsByClassName('item');
+  const $slides = document.querySelectorAll('.slide-wrapper li.item');
+  const slideCount = [...$slides];
+
+  console.log('slide function', listContent);
+}
+
 // 메인 티비 프로그램 리스트
 async function renderMainTv() {
   // state
@@ -152,8 +176,9 @@ async function renderMainTv() {
   const WIDTH = 300;
 
   let listHtml = '';
-  
+
   tvShowsList.forEach(tvshow => {
+    // console.log(tvshow);
     if (tvshow.backdrop_path) {
       listHtml += `<li class="item">
                   <div class="bob-container">
@@ -170,7 +195,7 @@ async function renderMainTv() {
                           ${tvshow.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
                         </li>
                         <li>
-                        ${getGenre(tvshow)}
+                        ${ getGenre(tvshow)}
                         </li>
                       </ul>
                     </div>
@@ -197,6 +222,12 @@ async function renderMainTv() {
     }
   });
   $tvShowList.innerHTML = listHtml;
+  
+  // slideList = $tvShowList.querySelectorAll('li.item');
+  $controls.onclick = ({ target }) => {
+    sliderWrapper = target.parentNode.parentNode;
+    slide(sliderWrapper);
+  };
 }
 
 // Main Movies List
@@ -253,6 +284,7 @@ async function renderMainMovie() {
     }
   });
   $movieList.innerHTML = listHtml;
+  
 }
 
 // 티비 프로그램 > 순위 티비 프로그램 리스트
@@ -473,8 +505,10 @@ async function renderpopularMovie() {
                 </li>`;
     }
   });
+
   $popularMovieList.innerHTML = listHtml;
 }
+
 
 async function render() {
   renderMainTv();
@@ -483,12 +517,14 @@ async function render() {
   renderpopularTv();
   renderRateMovie();
   renderpopularMovie();
+  slide();
 }
 
-function init() {
-  render();
+async function init() {
+  await render();
 }
 
 init();
 
-// 슬라이드
+
+
