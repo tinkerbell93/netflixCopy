@@ -145,8 +145,9 @@ function getGenre(movie) {
   return nameArr;
 }
 
-// 티비 프로그램 > 순위 티비 프로그램 리스트
+// 순위 티비 프로그램 리스트
 async function renderRatedTv() {
+
   // state
   const tvShowsList = await tmdb().ratedTv();
   const IMAGEURL = 'https://image.tmdb.org/t/p';
@@ -155,7 +156,6 @@ async function renderRatedTv() {
   let listHtml = '';
 
   tvShowsList.forEach(tvshow => {
-    console.log(tvshow);
     listHtml += `<li class="item">
       <div class="bob-container">
         <img alt="${tvshow.name}"
@@ -196,136 +196,66 @@ async function renderRatedTv() {
   });
   $rateTvShowList.innerHTML = listHtml;
 
-  // stats
-  const startNum = 5; // initial slide index (0 ~ 4)
-  let curIndex = 5;
-
   // DOMs
   const $ul = $rateTvShowList.parentNode.querySelector('ul');
   const $nextBtn = $ul.parentNode.parentNode.querySelector('.next-btn');
   const $prevBtn = $ul.parentNode.parentNode.querySelector('.prev-btn');
 
-  const firstChild = $ul.firstElementChild;
-  const lastChild = $ul.lastElementChild;
-  const clonedFirst = [
-    firstChild.cloneNode(true),
-    firstChild.nextSibling.cloneNode(true),
-    firstChild.nextSibling.nextSibling.cloneNode(true),
-    firstChild.nextSibling.nextSibling.nextSibling.cloneNode(true),
-    firstChild.nextSibling.nextSibling.nextSibling.nextSibling.cloneNode(true),
-  ];
-  // let clonedFirst = firstChild.cloneNode(true);
+  // 컨텐트 받아오고 컨텐트에 부여할 클래스 숫자 배열을 생성.
+  const content = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
+  let nowClass = [1, 2, 3, 4, 5, 6, 7, '', '', '', '', '', '', '', '', '', '', '', '', 0];
 
-  const clonedLast = [
-    lastChild.cloneNode(true),
-    lastChild.previousSibling.cloneNode(true),
-    lastChild.previousSibling.previousSibling.cloneNode(true),
-    lastChild.previousSibling.previousSibling.previousSibling.cloneNode(true),
-    lastChild.previousSibling.previousSibling.previousSibling.previousSibling.cloneNode(
-      true
-    ),
-  ];
-  console.log(clonedLast);
+  // 바뀔 클래스 숫자 배열 선언.
+  let afterClass;
 
-  // let clonedLast = lastChild.cloneNode(true);
+  const $slideItems = [...document.querySelector('.rate-tvShow-list ul').children];
 
-  $ul.style.transform = 'translate3d(-' + slideWidth * (startNum + 5) + 'px, 0px, 0px)';
-
-  $ul.style.width = slideWidth * slideLen + 'px';
-
-  // addClone node
-  clonedFirst.forEach(a => {
-    a.classList.add('item');
-    $ul.appendChild(a);
-  });
-  clonedLast.forEach(b => {
-    b.classList.add('item');
-    $ul.insertBefore(b, $ul.firstElementChild);
+  $slideItems.forEach((item, i) => {
+    item.classList.add(`slide-item-${nowClass[i]}`);
   });
 
-  // $ul.appendChild(clonedFirst);
-  // $ul.insertBefore(clonedLast, $ul.firstElementChild);
+  // 보여질 개수
+  const show = 6;
+  // 클래스 배열에 숫자를 부여할 시작 인덱스, 종료 인덱스 넘버 값을 가지고 있는 변수.
+  let start = content.length - 1;
+  let end = show + 1;
 
-  const $item = $ul.querySelectorAll('.item');
-  let curSlide = [
-    $item[curIndex],
-    $item[curIndex + 1],
-    $item[curIndex + 2],
-    $item[curIndex + 3],
-    $item[curIndex + 4],
-  ];
-  console.log($item.length, '1');
-  $ul.style.width = slideWidth * slideLen + 'px';
-  // curSlide.classList.add('slide_active');
-  curSlide.forEach(a => {
-    a.classList.add('slide_active');
-  });
-  const slideLen = $item.length;
-  const slideWidth = 280;
-  const slideSpeed = 300;
-  $nextBtn.addEventListener('click', () => {
-    if (curIndex <= slideLen - 5) {
-      console.log(curIndex);
-      $ul.style.transition = slideSpeed + 'ms';
-      $ul.style.transform = 'translate3d(-' + slideWidth * (curIndex + 1) + 'px, 0px, 0px)';
+  const setAfterClass = () => {
+    if (start < end) {
+      afterClass = [
+        ...new Array(start).fill(''),
+        ...(Array.from({ length: show + 2 }, (_, i) => i)),
+        ...new Array(content.length - end).fill('')
+      ];
+    } else if (start > end) {
+      const count = content.length - start;
+      // start(12), end(4)
+      afterClass = [
+        ...(Array.from({ length: end + 1 }, (_, i) => count + i)),
+        ...new Array(content.length - show - 2).fill(''),
+        ...(Array.from({ length: count }, (_, i) => i))
+      ];
     }
-    if (curIndex >= slideLen - 9) {
-      console.log(curIndex);
-      setTimeout(function () {
-        $ul.style.transition = '0ms';
-        $ul.style.transform = 'translate3d(-' + slideWidth + 'px, 0px, 0px)';
-      }, slideSpeed);
-      curIndex = 0;
-    }
+  };
+  const classChange = () => {
+    setAfterClass();
+    // 첫번째 인수로 주어진 클래스를 제거하고 두번째 인수의 클래스로 변경하는 메소드.
+    $slideItems.forEach((item, i) => {
+      item.classList.replace(`slide-item-${nowClass[i]}`, `slide-item-${afterClass[i]}`);
+    });
+  };
 
-    // curSlide.classList.remove('slide_active');
-    curSlide.forEach(a => {
-      a.classList.remove('slide_active');
-    });
-    const temp = curIndex;
-    curSlide = [
-      $item[temp + 1],
-      $item[temp + 2],
-      $item[temp + 3],
-      $item[temp + 4],
-      $item[temp + 5],
-    ];
-    curIndex += 5;
-    curSlide.forEach(a => {
-      a.classList.add('slide_active');
-    });
-  });
-
-  $prevBtn.addEventListener('click', () => {
-    if (curIndex >= 0) {
-      $ul.style.transition = slideSpeed + 'ms';
-      $ul.style.transform = 'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
-    }
-    if (curIndex === 0) {
-      setTimeout(function () {
-        $ul.style.transition = '0ms';
-        $ul.style.transform = 'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
-      }, slideSpeed);
-      curIndex = slideLen;
-    }
-
-    curSlide.forEach(a => {
-      a.classList.remove('slide_active');
-    });
-    curSlide = [
-      $item[curIndex],
-      $item[curIndex - 1],
-      $item[curIndex - 2],
-      $item[curIndex - 3],
-      $item[curIndex - 4],
-    ];
-    curSlide.forEach(a => {
-      a.classList.add('slide_active');
-    });
-  });
+  $nextBtn.onclick = () => {
+    start = end - 1 >= 0 ? end - 1 : content.length - 1;
+    end = start + show + 1;
+    end = end > content.length - 1 ? end - content.length : end;
+    console.log(start, end);
+    classChange();
+    nowClass = afterClass;
+  };
 }
 
-// 티비 프로그램 > 인기 티비 프로그램 리스트
+// 인기 티비 프로그램 리스트
 async function renderpopularTv() {
   // state
   const tvShowList = await tmdb().popularTv();
@@ -510,7 +440,7 @@ async function renderpopularTv() {
   });
 }
 
-// 영화 > 순위 영화 리스트
+// 순위 영화 리스트
 async function renderRateMovie() {
   // state
   const moviesList = await tmdb().ratedMovie();
@@ -565,7 +495,7 @@ async function renderRateMovie() {
   $rateMovieList.innerHTML = listHtml;
 }
 
-// 영화 > 인기 영화 리스트
+// 인기 영화 리스트
 async function renderpopularMovie() {
   // state
   const moviesList = await tmdb().popularMovie();
