@@ -1,107 +1,219 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400);
 
-.infoMore{
+.infoMore {
   position: relative;
   background: #000;
-  height: 600px;
+  height: 630px;
   z-index: 1;
-  padding: 30px 0;
+  // padding-bottom: 30px;
+  padding-left: 50px;
   overflow: hidden;
-  font-size: 20px;
-  display:none;
-  .info-wrap{
+  font-size: 26px;
+  color: gray;
+  display: none;
+  margin-top: 70px;
+
+  .info-wrap {
     margin: 0 auto;
-    width: 90vw;
-    .btn{
-      position: absolute; 
-      left: 50%;
-      margin-left: -200px;
-      bottom: 10%;
-      .infoMore-nav-btn{
-        color: white;
+    height: 100%;
+
+    .main-navigation {
+      height: 100%;
+
+      ul {
+        height: 100%;
+
+        .infoMore-main-info {
+
+          .info-title {
+            color: white;
+            padding-bottom: 30px;
+            font-size: 100px;
+            width: 60%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .content-info {
+            font-weight: bold;
+            color: white;
+            font-size: .8em;
+          }
+
+          .synopsis {
+            font-size: .8em;
+          }
+        }
+
+        .link-wrapper {
+          float: left;
+          height: 50px;
+          font-weight: bold;
+          display: flex;
+          margin-bottom: 120px;
+
+          button {
+            font-size: 1em;
+            height: 50px;
+
+            &.play-btn {
+              width: 130px;
+            }
+
+            &.addList-btn {
+              width: 250px;
+            }
+
+            span {
+              font-weight: bold;
+              font-size: 21px;
+              padding-left: 0;
+
+            }
+          }
+        }
+
+        .thumbs-wrapper {
+          float: left;
+          margin-left: 20px;
+
+          button {
+            border: 1px solid white;
+            border-radius: 50%;
+            font-size: 25px;
+            padding: 7px 5px;
+            cursor: pointer;
+          }
+        }
+
+        .meta-lists {
+          clear: both;
+          font-size: .8em;
+
+        }
+      }
+
+      .btn {
+        position: absolute;
+        left: 50%;
+        bottom: 0;
+        width: 100%;
+        margin-left: -300px;
+
+        button {
+          font-size: 19px;
+          font-weight: bold;
+          color: white;
+          padding: 10px 10px 0 10px;
+          height: 55px;
+          line-height: 45px;
+          margin: 0 10px;
+          cursor: pointer;
+
+          &:hover {
+            font-size: 20px;
+
+            &::after {
+              display: block;
+              content: "";
+              height: 5px;
+              background: #E50914;
+            }
+          }
+
+          .infoMore-nav-btn {
+            color: white;
+          }
+        }
+      }
+
+
+    }
+
+    .infoMore-BG {
+      width: calc(100vw - 570px);
+      background: url("../img/image.jpg") no-repeat 0 50%;
+      background-size: cover;
+      height: 100%;
+      position: absolute;
+      z-index: -1;
+      right: 0;
+      top: 0;
+
+      // 그래디언트 필터입니다.
+      &::after {
+        content: '';
+        width: 100%;
+        height: 100%;
+        display: block;
+        background: linear-gradient(to right, #000, rgba(0, 0, 0, 0) 100px);
       }
     }
-    
-  }
-  
-  .info-title{
-    padding: 30px 0;
-    font-size: 70px;
-  }
-}
-.infoMore-BG{
-  width: calc(100vw - 570px);
-  background: url("../img/image.jpg") no-repeat 0 50%;
-  background-size: cover;
-  height: 100%;
-  position: absolute;
-  z-index: -1;
-  right: 0;
-  top: 0;
-  // 그래디언트 필터입니다.
-  &::after{
-    content: '';
-    width: 100%;
-    height: 100%;
-    display: block;
-    background: linear-gradient(to right, #000, rgba(0, 0, 0, 0) 100px);
-  }
-}
-.content-info{
-  display: flex;
-  width: 170px;
-  justify-content: space-between;
-}
-.synopsis{
-  width: 700px;
-  word-break: keep-all;
-}
-.inline-list,
-.list-items{
-  display: flex;
-}
-.list-items{
-  li{
-    margin-left: 10px;
-    &:not(:last-of-type)::after{
-      content: ',';
+
+    .content-info {
+      display: flex;
+      width: 170px;
+      justify-content: space-between;
+    }
+
+    .synopsis {
+      width: 700px;
+      word-break: keep-all;
+    }
+
+    .inline-list,
+    .list-items {
+      display: flex;
+    }
+
+    .list-items {
+      li {
+        margin-left: 10px;
+
+        &:not(:last-of-type)::after {
+          content: ',';
+        }
+      }
+    }
+
+    .info-list {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: 0;
+      display: flex;
+      width: 600px;
+      justify-content: space-between;
+
+      li::after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 5px;
+        background: red;
+        margin-top: 10px;
+      }
+    }
+
+    .thumbs-wrapper .like-btn,
+    .thumbs-wrapper .dislike-btn {
+      border: none;
+      color: white;
+      display: inline;
+      text-align: center;
+    }
+
+    .carousel {
+      position: absolute;
+      top: 10%;
+      left: 50px;
+
+    }
+
+    .test1-myList .item {
+      display: inline-block;
+
     }
   }
-}
-.info-list{
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 0;
-  display: flex;
-  width: 600px;
-  justify-content: space-between;
-  li::after{
-    content: '';
-    display: block;
-    width: 100%;
-    height: 5px;
-    background: red;
-    margin-top: 10px;
-  }
-}
-
-.thumbs-wrapper .like-btn,
-.thumbs-wrapper .dislike-btn
-{
-  border: none;
-  color : white;
-  display: inline;
-  text-align: center;
-}
-
-.carousel {
-  position: absolute;
-  top: 10%;
-  left: 50px;
-  
-}
-.test1-myList .item{
-  display: inline-block;
-  
 }
