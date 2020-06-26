@@ -146,7 +146,6 @@ function getGenre(movie) {
 }
 
 // 순위 티비 프로그램 리스트
-// 마리님 여기 확인해주세요!!!!!!!!!!!!!!!!!!!
 async function renderRatedTv() {
   // state
   const tvShowsList = await tmdb().ratedTv();
@@ -198,19 +197,6 @@ async function renderRatedTv() {
   });
   $rateTvShowList.innerHTML = listHtml;
 
-  let dotNum = [...$rateTvShowList.children].length;
-  let slideDot = $rateTvShowList.parentNode.parentNode.querySelector(
-    '.slide-dot'
-  );
-  let dotHtml = '';
-  for (let i = 0; i <= dotNum; i++) {
-    dotHtml += `
-    <li>
-      
-    </li>`;
-  }
-  slideDot.innerHTML = dotHtml;
-
   // stats
   const startNum = 5; // initial slide index (0 ~ 4)
   let curIndex = startNum;
@@ -259,7 +245,7 @@ async function renderRatedTv() {
 
   const $item = $ul.querySelectorAll('.item');
   const slideLen = $item.length;
-  const slideWidth = 280;
+  const slideWidth = 260;
   const slideSpeed = 300;
   $ul.style.transform =
     'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
@@ -281,12 +267,12 @@ async function renderRatedTv() {
   });
 
   $prevBtn.addEventListener('click', () => {
-    if (curIndex >= 5) {
+    if (curIndex >= 0) {
       $ul.style.transition = slideSpeed + 'ms';
       $ul.style.transform =
         'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
     }
-    if (curIndex === 10) {
+    if (curIndex === 0) {
       setTimeout(function () {
         $ul.style.transition = '0ms';
         $ul.style.transform =
@@ -403,7 +389,7 @@ async function renderpopularTv() {
 
   const $item = $ul.querySelectorAll('.item');
   const slideLen = $item.length;
-  const slideWidth = 280;
+  const slideWidth = 260;
   const slideSpeed = 300;
   $ul.style.transform =
     'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
@@ -546,7 +532,7 @@ async function renderRateMovie() {
 
   const $item = $ul.querySelectorAll('.item');
   const slideLen = $item.length;
-  const slideWidth = 245;
+  const slideWidth = 260;
   const slideSpeed = 300;
   $ul.style.transform =
     'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
@@ -690,7 +676,7 @@ async function renderpopularMovie() {
   const $item = $ul.querySelectorAll('.item');
   const slideLen = $item.length;
   // 245 260
-  const slideWidth = 258;
+  const slideWidth = 260;
   const slideSpeed = 300;
   $ul.style.transform =
     'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
