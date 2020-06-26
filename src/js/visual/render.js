@@ -80,6 +80,8 @@ async function render() {
   contentTitle = content.title ? content.title : content.name;
 
   contentBrief = content.overview;
+  console.log(content);
+
   let temp = contentBrief.split(' ');
   // if (temp.length > 30) {
   //   temp = contentBrief.split('.');
@@ -226,6 +228,7 @@ async function searchList(e) {
 
   test.style.display = 'none';
   test1.style.height = '1000px';
+  test1.style.background = '#141414';
 
   let myLists = searchList;
 
