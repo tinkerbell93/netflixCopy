@@ -146,7 +146,6 @@ function getGenre(movie) {
 }
 
 // 순위 티비 프로그램 리스트
-// 마리님 여기 확인해주세요!!!!!!!!!!!!!!!!!!!
 async function renderRatedTv() {
   // state
   const tvShowsList = await tmdb().ratedTv();
@@ -197,19 +196,6 @@ async function renderRatedTv() {
     </li>`;
   });
   $rateTvShowList.innerHTML = listHtml;
-
-  let dotNum = [...$rateTvShowList.children].length;
-  let slideDot = $rateTvShowList.parentNode.parentNode.querySelector(
-    '.slide-dot'
-  );
-  let dotHtml = '';
-  for (let i = 0; i <= dotNum; i++) {
-    dotHtml += `
-    <li>
-      
-    </li>`;
-  }
-  slideDot.innerHTML = dotHtml;
 
   // stats
   const startNum = 5; // initial slide index (0 ~ 4)
@@ -281,12 +267,12 @@ async function renderRatedTv() {
   });
 
   $prevBtn.addEventListener('click', () => {
-    if (curIndex >= 5) {
+    if (curIndex >= 0) {
       $ul.style.transition = slideSpeed + 'ms';
       $ul.style.transform =
         'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
     }
-    if (curIndex === 10) {
+    if (curIndex === 0) {
       setTimeout(function () {
         $ul.style.transition = '0ms';
         $ul.style.transform =

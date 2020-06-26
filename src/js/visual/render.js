@@ -199,7 +199,6 @@ function addList(e) {
   }
 
   item = localStorage.getItem('itemList');
-  console.log(JSON.parse(item));
 }
 
 async function searchList(e) {
