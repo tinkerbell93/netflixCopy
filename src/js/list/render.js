@@ -259,7 +259,7 @@ async function renderRatedTv() {
 
   const $item = $ul.querySelectorAll('.item');
   const slideLen = $item.length;
-  const slideWidth = 280;
+  const slideWidth = 260;
   const slideSpeed = 300;
   $ul.style.transform =
     'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
@@ -403,7 +403,7 @@ async function renderpopularTv() {
 
   const $item = $ul.querySelectorAll('.item');
   const slideLen = $item.length;
-  const slideWidth = 280;
+  const slideWidth = 260;
   const slideSpeed = 300;
   $ul.style.transform =
     'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
@@ -546,7 +546,7 @@ async function renderRateMovie() {
 
   const $item = $ul.querySelectorAll('.item');
   const slideLen = $item.length;
-  const slideWidth = 245;
+  const slideWidth = 260;
   const slideSpeed = 300;
   $ul.style.transform =
     'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
@@ -690,7 +690,7 @@ async function renderpopularMovie() {
   const $item = $ul.querySelectorAll('.item');
   const slideLen = $item.length;
   // 245 260
-  const slideWidth = 258;
+  const slideWidth = 260;
   const slideSpeed = 300;
   $ul.style.transform =
     'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
