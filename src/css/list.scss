@@ -77,6 +77,7 @@ main h3 button{
   padding: 5px;
   border-radius: 50%;
   cursor: pointer;
+  outline: none;
 }
 
 // 리스트 아이템 왼쪽 영역
@@ -153,8 +154,8 @@ main h3 button{
 .controls button {
   position: absolute;
   top: 54px;
-  width: 45px;
-  height: 138px;
+  width: 50px;
+  height: 139px;
   padding: 0;
   font-size: 20px;
   color: #fff;
@@ -162,10 +163,12 @@ main h3 button{
   outline: none;
 }
 .controls button:hover {
-  background-color: rgba(27, 27, 27, 0.7);
+  // background-color: rgba(27, 27, 27, 0.7);
+  // background-color: #151515;
 }
 .controls .prev-btn {
   left: 0;
+  background-color: #151515;
 }
 .controls .next-btn {
   right: 0;
