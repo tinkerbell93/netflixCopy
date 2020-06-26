@@ -154,7 +154,7 @@ main h3 button{
 .controls button {
   position: absolute;
   top: 54px;
-  width: 50px;
+  width: 43px;
   height: 139px;
   padding: 0;
   font-size: 20px;
@@ -173,7 +173,7 @@ main h3 button{
 .controls .next-btn {
   right: 0;
   width: 73px;
-  background-color: hsla(0, 0%, 8%, 0.4);
+  // background-color: hsla(0, 0%, 8%, 0.4);
 }
 .controls .prev-btn:before {
   visibility: hidden;
