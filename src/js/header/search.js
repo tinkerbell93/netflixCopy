@@ -29,11 +29,18 @@ $iconSearch.onclick = () => {
 
 // 포커스가 빠지면 서치박스 닫힘
 $contentSearch.onblur = e => {
-  if($contentSearch.value !== '') return;
+  if ($contentSearch.value !== '') return;
   $searchFormContainer.classList.remove('active');
 };
 
-// 스크롤 발생 시 헤더 배경 투명 -> 검은색 변경
-window.onscroll = () => {
-  $header.style.backgroundColor = 'black';
-}
+// FUNCTION
+const scrollFunction = () => {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    $header.style.backgroundColor = '#141414';
+  } else {
+    $header.style.backgroundColor = 'transparent';
+  }
+};
+
+// EVENTs
+window.onscroll = scrollFunction;
