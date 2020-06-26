@@ -203,17 +203,16 @@
       display: inline;
       text-align: center;
     }
-
-    .carousel {
-      position: absolute;
-      top: 10%;
-      left: 50px;
-
-    }
-
-    .test1-myList .item {
-      display: inline-block;
-
-    }
   }
+}
+
+.carousel {
+  position: absolute;
+  top: 10%;
+  left: 50px;
+}
+
+.test1-myList .item {
+  display: inline-block;
+
 }

@@ -82,10 +82,10 @@ async function render() {
   contentBrief = content.overview;
 
   let temp = contentBrief.split(' ');
-  // if (temp.length > 30) {
-  //   temp = contentBrief.split('.');
-  //   contentBrief = temp[0] + '.';
-  // }
+  if (temp.length > 30) {
+    temp = contentBrief.split('.');
+    contentBrief = temp[0] + '.';
+  }
 
   contentImage = await getContentImage();
   mainVisual.innerHTML = `
@@ -199,7 +199,6 @@ function addList(e) {
   }
 
   item = localStorage.getItem('itemList');
-  console.log(JSON.parse(item));
 }
 
 async function searchList(e) {
