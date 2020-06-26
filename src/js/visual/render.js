@@ -80,7 +80,6 @@ async function render() {
   contentTitle = content.title ? content.title : content.name;
 
   contentBrief = content.overview;
-  console.log(content);
 
   let temp = contentBrief.split(' ');
   // if (temp.length > 30) {

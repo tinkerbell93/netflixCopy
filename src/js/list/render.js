@@ -145,21 +145,23 @@ function getGenre(movie) {
   return nameArr;
 }
 
-// 티비 프로그램 > 순위 티비 프로그램 리스트
+// 순위 티비 프로그램 리스트
+// 마리님 여기 확인해주세요!!!!!!!!!!!!!!!!!!!
 async function renderRatedTv() {
   // state
   const tvShowsList = await tmdb().ratedTv();
   const IMAGEURL = 'https://image.tmdb.org/t/p';
-  const WIDTH = 300;
+  const WIDTH = 500;
 
   let listHtml = '';
 
   tvShowsList.forEach((tvshow) => {
-    if (tvshow.backdrop_path) {
-      listHtml += `<li class="item">
+    listHtml += `<li class="item">
       <div class="bob-container">
-        <img alt="${tvshow.title}"
-        src="${IMAGEURL}/w${WIDTH}${tvshow.backdrop_path}">
+        <img alt="${tvshow.name}"
+        src="${IMAGEURL}/w${WIDTH}${
+      tvshow.backdrop_path ? tvshow.backdrop_path : tvshow.poster_path
+    }">
         <div class="bob-overview-wapper">
           <button type="button" class="play-btn icon-play">                 
             <span class="a11y-hidden">재생</span>
@@ -168,7 +170,7 @@ async function renderRatedTv() {
           <h4 class="item-title">${tvshow.name}</h4>
           <ul>
             <li class="maturity-rating">
-              ${tvshow.adult ? '청소년 관람 불가' : '모든 연령 관람 가능'}
+              ${tvshow.adult ? '청소년 관람 불가' : ''}
             </li>
             <li>
             ${getGenre(tvshow)}
@@ -188,14 +190,11 @@ async function renderRatedTv() {
             </button>
           </div>
         </div>
-        
         <!-- 클릭 시 상세정보 뜸 -->
-        <button type="button" class="detail-btn">
-          <span class="a11y-hidden">상세 정보</span>
+        <button type="button" class="detail-btn icon-down-open">
         </button>
       </div>
     </li>`;
-    }
   });
   $rateTvShowList.innerHTML = listHtml;
 
@@ -276,18 +275,18 @@ async function renderRatedTv() {
         $ul.style.transition = '0ms';
         $ul.style.transform = 'translate3d(-' + slideWidth + 'px, 0px, 0px)';
       }, slideSpeed);
-      curIndex = -1;
+      curIndex = 0;
     }
     curIndex++;
   });
 
   $prevBtn.addEventListener('click', () => {
-    if (curIndex >= 0) {
+    if (curIndex >= 5) {
       $ul.style.transition = slideSpeed + 'ms';
       $ul.style.transform =
         'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
     }
-    if (curIndex === 0) {
+    if (curIndex === 10) {
       setTimeout(function () {
         $ul.style.transition = '0ms';
         $ul.style.transform =
@@ -443,7 +442,7 @@ async function renderpopularTv() {
   });
 }
 
-// 영화 > 순위 영화 리스트
+// 순위 영화 리스트
 async function renderRateMovie() {
   // state
   const moviesList = await tmdb().ratedMovie();
@@ -455,48 +454,45 @@ async function renderRateMovie() {
   moviesList.forEach((movie) => {
     if (movie.backdrop_path) {
       listHtml += `<li class="item">
-                  <div class="bob-container">
-                    <img alt="${movie.title}"
-                    src="${IMAGEURL}/w${WIDTH}${movie.backdrop_path}">
-                    <div class="bob-overview-wapper">
-                      <button type="button" class="play-btn icon-play">                 
-                        <span class="a11y-hidden">재생</span>
-                      </button>
-                      <!-- 콘텐츠 정보 -->
-                      <h4 class="item-title">${movie.title}</h4>
-                      <ul>
-                        <li class="maturity-rating">
-                          ${
-                            movie.adult
-                              ? '청소년 관람 불가'
-                              : '모든 연령 관람 가능'
-                          }
-                        </li>
-                        <li>
-                          ${getGenre(movie)}
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="bob-actions-wrapper">
-                      <div class="thumbs-wrapper">
-                        <button type="button" class="like-btn icon-thumbs-up">                  
-                          <span class="a11y-hidden">좋아요</span>
+                    <div class="bob-container">
+                      <img alt="${movie.title}"
+                      src="${IMAGEURL}/w${WIDTH}${
+        movie.backdrop_path ? movie.backdrop_path : movie.poster_path
+      }">
+                      <div class="bob-overview-wapper">
+                        <button type="button" class="play-btn icon-play">                 
+                          <span class="a11y-hidden">재생</span>
                         </button>
-                        <button type="button" class="dislike-btn icon-thumbs-down">                   
-                          <span class="a11y-hidden">싫어요</span>
-                        </button>
-                        <button type="button" class="myList-btn icon-plus">                   
-                          <span class="a11y-hidden">내가 찜한 콘텐츠</span>
-                        </button>
+                        <!-- 콘텐츠 정보 -->
+                        <h4 class="item-title">${movie.title}</h4>
+                        <ul>
+                          <li class="maturity-rating">
+                            ${movie.adult ? '청소년 관람 불가' : ''}
+                          </li>
+                          <li>
+                            ${getGenre(movie)}
+                          </li>
+                        </ul>
                       </div>
+                      <div class="bob-actions-wrapper">
+                        <div class="thumbs-wrapper">
+                          <button type="button" class="like-btn icon-thumbs-up">                  
+                            <span class="a11y-hidden">좋아요</span>
+                          </button>
+                          <button type="button" class="dislike-btn icon-thumbs-down">                   
+                            <span class="a11y-hidden">싫어요</span>
+                          </button>
+                          <button type="button" class="myList-btn icon-plus">                   
+                            <span class="a11y-hidden">내가 찜한 콘텐츠</span>
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <!-- 클릭 시 상세정보 뜸 -->
+                      <button type="button" class="detail-btn icon-down-open">
+                      </button>
                     </div>
-                    
-                    <!-- 클릭 시 상세정보 뜸 -->
-                    <button type="button" class="detail-btn">
-                      <span class="a11y-hidden">상세 정보</span>
-                    </button>
-                  </div>
-                </li>`;
+                  </li>`;
     }
   });
 
@@ -550,7 +546,7 @@ async function renderRateMovie() {
 
   const $item = $ul.querySelectorAll('.item');
   const slideLen = $item.length;
-  const slideWidth = 280;
+  const slideWidth = 245;
   const slideSpeed = 300;
   $ul.style.transform =
     'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
@@ -589,7 +585,7 @@ async function renderRateMovie() {
   });
 }
 
-// 영화 > 인기 영화 리스트
+// 인기 영화 리스트
 async function renderpopularMovie() {
   // state
   const moviesList = await tmdb().popularMovie();
@@ -601,48 +597,45 @@ async function renderpopularMovie() {
   moviesList.forEach((movie) => {
     if (movie.backdrop_path) {
       listHtml += `<li class="item">
-                  <div class="bob-container">
-                    <img alt="${movie.title}"
-                    src="${IMAGEURL}/w${WIDTH}${movie.backdrop_path}">
-                    <div class="bob-overview-wapper">
-                      <button type="button" class="play-btn icon-play">                 
-                        <span class="a11y-hidden">재생</span>
-                      </button>
-                      <!-- 콘텐츠 정보 -->
-                      <h4 class="item-title">${movie.title}</h4>
-                      <ul>
-                        <li class="maturity-rating">
-                          ${
-                            movie.adult
-                              ? '청소년 관람 불가'
-                              : '모든 연령 관람 가능'
-                          }
-                        </li>
-                        <li>
-                          ${getGenre(movie)}
-                        </li>
-                      </ul>
-                    </div>
-                    <div class="bob-actions-wrapper">
-                      <div class="thumbs-wrapper">
-                        <button type="button" class="like-btn icon-thumbs-up">                  
-                          <span class="a11y-hidden">좋아요</span>
+                    <div class="bob-container">
+                      <img alt="${movie.title}"
+                      src="${IMAGEURL}/w${WIDTH}${
+        movie.backdrop_path ? movie.backdrop_path : movie.poster_path
+      }">
+                      <div class="bob-overview-wapper">
+                        <button type="button" class="play-btn icon-play">                 
+                          <span class="a11y-hidden">재생</span>
                         </button>
-                        <button type="button" class="dislike-btn icon-thumbs-down">                   
-                          <span class="a11y-hidden">싫어요</span>
-                        </button>
-                        <button type="button" class="myList-btn icon-plus">                   
-                          <span class="a11y-hidden">내가 찜한 콘텐츠</span>
-                        </button>
+                        <!-- 콘텐츠 정보 -->
+                        <h4 class="item-title">${movie.title}</h4>
+                        <ul>
+                          <li class="maturity-rating">
+                            ${movie.adult ? '청소년 관람 불가' : ''}
+                          </li>
+                          <li>
+                            ${getGenre(movie)}
+                          </li>
+                        </ul>
                       </div>
+                      <div class="bob-actions-wrapper">
+                        <div class="thumbs-wrapper">
+                          <button type="button" class="like-btn icon-thumbs-up">                  
+                            <span class="a11y-hidden">좋아요</span>
+                          </button>
+                          <button type="button" class="dislike-btn icon-thumbs-down">                   
+                            <span class="a11y-hidden">싫어요</span>
+                          </button>
+                          <button type="button" class="myList-btn icon-plus">                   
+                            <span class="a11y-hidden">내가 찜한 콘텐츠</span>
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <!-- 클릭 시 상세정보 뜸 -->
+                      <button type="button" class="detail-btn icon-down-open">
+                      </button>
                     </div>
-                    
-                    <!-- 클릭 시 상세정보 뜸 -->
-                    <button type="button" class="detail-btn">
-                      <span class="a11y-hidden">상세 정보</span>
-                    </button>
-                  </div>
-                </li>`;
+                  </li>`;
     }
   });
 
@@ -696,7 +689,8 @@ async function renderpopularMovie() {
 
   const $item = $ul.querySelectorAll('.item');
   const slideLen = $item.length;
-  const slideWidth = 280;
+  // 245 260
+  const slideWidth = 258;
   const slideSpeed = 300;
   $ul.style.transform =
     'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
