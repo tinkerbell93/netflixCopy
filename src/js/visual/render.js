@@ -278,8 +278,11 @@ async function searchList(e) {
 }
 
 function gHome() {
+  const mainVisual = document.querySelector('.main-visual');
   test.style.display = 'block';
   test1.style.display = 'none';
+  mainVisual.style.display = 'block';
+  infoMore.style.display = 'none';
 }
 
 async function init() {
