@@ -81,10 +81,10 @@ async function render() {
 
   contentBrief = content.overview;
   let temp = contentBrief.split(' ');
-  if (temp.length > 30) {
-    temp = contentBrief.split('.');
-    contentBrief = temp[0] + '.';
-  }
+  // if (temp.length > 30) {
+  //   temp = contentBrief.split('.');
+  //   contentBrief = temp[0] + '.';
+  // }
 
   contentImage = await getContentImage();
   mainVisual.innerHTML = `
@@ -276,7 +276,10 @@ async function searchList(e) {
   test1MyList.innerHTML = html;
 }
 
-function gHome() {}
+function gHome() {
+  test.style.display = 'block';
+  test1.style.display = 'none';
+}
 
 async function init() {
   await render();

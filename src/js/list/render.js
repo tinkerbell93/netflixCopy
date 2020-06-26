@@ -199,9 +199,22 @@ async function renderRatedTv() {
   });
   $rateTvShowList.innerHTML = listHtml;
 
+  let dotNum = [...$rateTvShowList.children].length;
+  let slideDot = $rateTvShowList.parentNode.parentNode.querySelector(
+    '.slide-dot'
+  );
+  let dotHtml = '';
+  for (let i = 0; i <= dotNum; i++) {
+    dotHtml += `
+    <li>
+      
+    </li>`;
+  }
+  slideDot.innerHTML = dotHtml;
+
   // stats
   const startNum = 5; // initial slide index (0 ~ 4)
-  let curIndex = -1;
+  let curIndex = startNum;
 
   // DOMs
   const $ul = $rateTvShowList.parentNode.querySelector('ul');
@@ -231,9 +244,6 @@ async function renderRatedTv() {
 
   // let clonedLast = lastChild.cloneNode(true);
 
-  $ul.style.transform =
-    'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
-
   $ul.style.width = slideWidth * slideLen + 'px';
 
   // addClone node
@@ -245,24 +255,23 @@ async function renderRatedTv() {
     b.classList.add('item');
     $ul.insertBefore(b, $ul.firstElementChild);
   });
-
   // $ul.appendChild(clonedFirst);
   // $ul.insertBefore(clonedLast, $ul.firstElementChild);
 
   const $item = $ul.querySelectorAll('.item');
-  $ul.style.width = slideWidth * slideLen + 'px';
   const slideLen = $item.length;
   const slideWidth = 280;
   const slideSpeed = 300;
+  $ul.style.transform =
+    'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
+
   $nextBtn.addEventListener('click', () => {
     if (curIndex <= slideLen - 5) {
-      
       $ul.style.transition = slideSpeed + 'ms';
       $ul.style.transform =
         'translate3d(-' + slideWidth * (curIndex + 2) + 'px, 0px, 0px)';
     }
     if (curIndex > slideLen - 12) {
-      console.log(curIndex);
       setTimeout(function () {
         $ul.style.transition = '0ms';
         $ul.style.transform = 'translate3d(-' + slideWidth + 'px, 0px, 0px)';
@@ -273,21 +282,18 @@ async function renderRatedTv() {
   });
 
   $prevBtn.addEventListener('click', () => {
-    
-    if (curIndex >= -1) {
-      console.log(curIndex);
+    if (curIndex >= 0) {
       $ul.style.transition = slideSpeed + 'ms';
       $ul.style.transform =
-        'translate3d(-' + slideWidth * curIndex  + 'px, 0px, 0px)';
+        'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
     }
-    if (curIndex === -1) {
-      console.log(curIndex);
+    if (curIndex === 0) {
       setTimeout(function () {
         $ul.style.transition = '0ms';
         $ul.style.transform =
-          'translate3d(-' + slideWidth * (slideLen - 11) + 'px, 0px, 0px)';
+          'translate3d(-' + slideWidth * (slideLen - 10) + 'px, 0px, 0px)';
       }, slideSpeed);
-      curIndex = slideLen - 11;
+      curIndex = slideLen - 10;
     }
     curIndex--;
   });
@@ -350,14 +356,11 @@ async function renderpopularTv() {
     }
   });
   $popularTvShowList.innerHTML = listHtml;
-  console.log($popularTvShowList , '뭐가 처음이냐');
-  
   // stats
-  const startNum = 4;
+  const startNum = 5; // initial slide index (0 ~ 4)
   let curIndex = startNum;
 
   // DOMs
-
   const $ul = $popularTvShowList.parentNode.querySelector('ul');
   const $nextBtn = $ul.parentNode.parentNode.querySelector('.next-btn');
   const $prevBtn = $ul.parentNode.parentNode.querySelector('.prev-btn');
@@ -382,12 +385,8 @@ async function renderpopularTv() {
       true
     ),
   ];
-  console.log(clonedLast);
 
   // let clonedLast = lastChild.cloneNode(true);
-
-  $ul.style.transform =
-    'translate3d(-' + slideWidth * startNum + 'px, 0px, 0px)';
 
   $ul.style.width = slideWidth * slideLen + 'px';
 
@@ -400,97 +399,47 @@ async function renderpopularTv() {
     b.classList.add('item');
     $ul.insertBefore(b, $ul.firstElementChild);
   });
-
   // $ul.appendChild(clonedFirst);
   // $ul.insertBefore(clonedLast, $ul.firstElementChild);
 
   const $item = $ul.querySelectorAll('.item');
-  let curSlide = [
-    $item[curIndex],
-    $item[curIndex + 1],
-    $item[curIndex + 2],
-    $item[curIndex + 3],
-    $item[curIndex + 4],
-  ];
-  $ul.style.width = slideWidth * slideLen + 'px';
-  // curSlide.classList.add('slide_active');
-  curSlide.forEach((a) => {
-    a.classList.add('slide_active');
-  });
-  const slideLen = $item.length - 1;
+  const slideLen = $item.length;
   const slideWidth = 280;
   const slideSpeed = 300;
+  $ul.style.transform =
+    'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
 
-  // --------------------------------------------
   $nextBtn.addEventListener('click', () => {
     if (curIndex <= slideLen - 5) {
-      console.log(curIndex);
       $ul.style.transition = slideSpeed + 'ms';
       $ul.style.transform =
-        'translate3d(-' + slideWidth * (curIndex + 1) + 'px, 0px, 0px)';
+        'translate3d(-' + slideWidth * (curIndex + 2) + 'px, 0px, 0px)';
     }
-    if (curIndex === slideLen - 10) {
-      console.log(curIndex);
+    if (curIndex > slideLen - 12) {
       setTimeout(function () {
         $ul.style.transition = '0ms';
-        $ul.style.transform = 'translate3d(-' + 0 + 'px, 0px, 0px)';
+        $ul.style.transform = 'translate3d(-' + slideWidth + 'px, 0px, 0px)';
       }, slideSpeed);
       curIndex = -1;
     }
-
-    // curSlide.classList.remove('slide_active');
-    curSlide.forEach((a) => {
-      a.classList.remove('slide_active');
-    });
-    let temp = curIndex;
-
-    curSlide = [
-      $item[temp + 1],
-      $item[temp + 2],
-      $item[temp + 3],
-      $item[temp + 4],
-      $item[temp + 5],
-    ];
-    curIndex += 5;
-    curSlide.forEach((a) => {
-      a.classList.add('slide_active');
-    });
+    curIndex++;
   });
-  // --------------------------------------------
-  $prevBtn.addEventListener('click', () => {
-    if (curIndex >= 4) {
-      console.log(curIndex);
 
+  $prevBtn.addEventListener('click', () => {
+    if (curIndex >= 0) {
       $ul.style.transition = slideSpeed + 'ms';
       $ul.style.transform =
-        'translate3d(-' + slideWidth * (curIndex + 1) + 'px, 0px, 0px)';
+        'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
     }
-    if (curIndex === 4) {
-      console.log(curIndex);
+    if (curIndex === 0) {
       setTimeout(function () {
         $ul.style.transition = '0ms';
         $ul.style.transform =
-          'translate3d(+' + slideWidth * (slideLen - 10) + 'px, 0px, 0px)';
+          'translate3d(-' + slideWidth * (slideLen - 10) + 'px, 0px, 0px)';
       }, slideSpeed);
       curIndex = slideLen - 10;
     }
-
-    curSlide.forEach((a) => {
-      a.classList.remove('slide_active');
-    });
-
-    let temp = curIndex;
-    curSlide = [
-      $item[temp - 1],
-      $item[temp - 2],
-      $item[temp - 3],
-      $item[temp - 4],
-      $item[temp - 5],
-    ];
-    curIndex -= 5;
-    curSlide.forEach((a) => {
-      a.classList.add('slide_active');
-    });
+    curIndex--;
   });
 }
 
@@ -552,6 +501,92 @@ async function renderRateMovie() {
   });
 
   $rateMovieList.innerHTML = listHtml;
+
+  // stats
+  const startNum = 5; // initial slide index (0 ~ 4)
+  let curIndex = startNum;
+
+  // DOMs
+  const $ul = $rateMovieList.parentNode.querySelector('ul');
+  const $nextBtn = $ul.parentNode.parentNode.querySelector('.next-btn');
+  const $prevBtn = $ul.parentNode.parentNode.querySelector('.prev-btn');
+
+  let firstChild = $ul.firstElementChild;
+  let lastChild = $ul.lastElementChild;
+  let clonedFirst = [
+    firstChild.cloneNode(true),
+    firstChild.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.nextSibling.nextSibling.cloneNode(true),
+  ];
+  // let clonedFirst = firstChild.cloneNode(true);
+
+  let clonedLast = [
+    lastChild.cloneNode(true),
+    lastChild.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.previousSibling.previousSibling.cloneNode(
+      true
+    ),
+  ];
+
+  // let clonedLast = lastChild.cloneNode(true);
+
+  $ul.style.width = slideWidth * slideLen + 'px';
+
+  // addClone node
+  clonedFirst.forEach((a) => {
+    a.classList.add('item');
+    $ul.appendChild(a);
+  });
+  clonedLast.forEach((b) => {
+    b.classList.add('item');
+    $ul.insertBefore(b, $ul.firstElementChild);
+  });
+  // $ul.appendChild(clonedFirst);
+  // $ul.insertBefore(clonedLast, $ul.firstElementChild);
+
+  const $item = $ul.querySelectorAll('.item');
+  const slideLen = $item.length;
+  const slideWidth = 280;
+  const slideSpeed = 300;
+  $ul.style.transform =
+    'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
+
+  $nextBtn.addEventListener('click', () => {
+    if (curIndex <= slideLen - 5) {
+      $ul.style.transition = slideSpeed + 'ms';
+      $ul.style.transform =
+        'translate3d(-' + slideWidth * (curIndex + 2) + 'px, 0px, 0px)';
+    }
+    if (curIndex > slideLen - 12) {
+      setTimeout(function () {
+        $ul.style.transition = '0ms';
+        $ul.style.transform = 'translate3d(-' + slideWidth + 'px, 0px, 0px)';
+      }, slideSpeed);
+      curIndex = -1;
+    }
+    curIndex++;
+  });
+
+  $prevBtn.addEventListener('click', () => {
+    if (curIndex >= 0) {
+      $ul.style.transition = slideSpeed + 'ms';
+      $ul.style.transform =
+        'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
+    }
+    if (curIndex === 0) {
+      setTimeout(function () {
+        $ul.style.transition = '0ms';
+        $ul.style.transform =
+          'translate3d(-' + slideWidth * (slideLen - 10) + 'px, 0px, 0px)';
+      }, slideSpeed);
+      curIndex = slideLen - 10;
+    }
+    curIndex--;
+  });
 }
 
 // 영화 > 인기 영화 리스트
@@ -612,6 +647,92 @@ async function renderpopularMovie() {
   });
 
   $popularMovieList.innerHTML = listHtml;
+
+  // stats
+  const startNum = 5; // initial slide index (0 ~ 4)
+  let curIndex = startNum;
+
+  // DOMs
+  const $ul = $popularMovieList.parentNode.querySelector('ul');
+  const $nextBtn = $ul.parentNode.parentNode.querySelector('.next-btn');
+  const $prevBtn = $ul.parentNode.parentNode.querySelector('.prev-btn');
+
+  let firstChild = $ul.firstElementChild;
+  let lastChild = $ul.lastElementChild;
+  let clonedFirst = [
+    firstChild.cloneNode(true),
+    firstChild.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.nextSibling.cloneNode(true),
+    firstChild.nextSibling.nextSibling.nextSibling.nextSibling.cloneNode(true),
+  ];
+  // let clonedFirst = firstChild.cloneNode(true);
+
+  let clonedLast = [
+    lastChild.cloneNode(true),
+    lastChild.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.previousSibling.cloneNode(true),
+    lastChild.previousSibling.previousSibling.previousSibling.previousSibling.cloneNode(
+      true
+    ),
+  ];
+
+  // let clonedLast = lastChild.cloneNode(true);
+
+  $ul.style.width = slideWidth * slideLen + 'px';
+
+  // addClone node
+  clonedFirst.forEach((a) => {
+    a.classList.add('item');
+    $ul.appendChild(a);
+  });
+  clonedLast.forEach((b) => {
+    b.classList.add('item');
+    $ul.insertBefore(b, $ul.firstElementChild);
+  });
+  // $ul.appendChild(clonedFirst);
+  // $ul.insertBefore(clonedLast, $ul.firstElementChild);
+
+  const $item = $ul.querySelectorAll('.item');
+  const slideLen = $item.length;
+  const slideWidth = 280;
+  const slideSpeed = 300;
+  $ul.style.transform =
+    'translate3d(-' + slideWidth * (startNum + 1) + 'px, 0px, 0px)';
+
+  $nextBtn.addEventListener('click', () => {
+    if (curIndex <= slideLen - 5) {
+      $ul.style.transition = slideSpeed + 'ms';
+      $ul.style.transform =
+        'translate3d(-' + slideWidth * (curIndex + 2) + 'px, 0px, 0px)';
+    }
+    if (curIndex > slideLen - 12) {
+      setTimeout(function () {
+        $ul.style.transition = '0ms';
+        $ul.style.transform = 'translate3d(-' + slideWidth + 'px, 0px, 0px)';
+      }, slideSpeed);
+      curIndex = -1;
+    }
+    curIndex++;
+  });
+
+  $prevBtn.addEventListener('click', () => {
+    if (curIndex >= 0) {
+      $ul.style.transition = slideSpeed + 'ms';
+      $ul.style.transform =
+        'translate3d(-' + slideWidth * curIndex + 'px, 0px, 0px)';
+    }
+    if (curIndex === 0) {
+      setTimeout(function () {
+        $ul.style.transition = '0ms';
+        $ul.style.transform =
+          'translate3d(-' + slideWidth * (slideLen - 10) + 'px, 0px, 0px)';
+      }, slideSpeed);
+      curIndex = slideLen - 10;
+    }
+    curIndex--;
+  });
 }
 
 async function render() {
