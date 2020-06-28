@@ -6,9 +6,9 @@
 
 클론 사이트: [Nexfilx](https://www.netflix.com/)
 
-시연 영상: [시연 영상 youtue](https://www.youtube.com/embed/x65D41OG87A)
+시연 영상: [시연 영상 youtube](https://www.youtube.com/embed/x65D41OG87A)
 
-![결과](./src/img/200628-02.png)
+![결과](./src/img/200628-02.jpg)
 
 ## 구현기능
 
