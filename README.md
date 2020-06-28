@@ -6,11 +6,13 @@
 
 클론 사이트: [Nexfilx](https://www.netflix.com/)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/x65D41OG87A" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+시연 영상: [시연 영상 youtue](https://www.youtube.com/embed/x65D41OG87A)
+
+![결과](./src/img/200628-02.png)
 
 ## 구현기능
 
-![구현기능 이미지](../img/200628-01.png)
+![구현기능 이미지](./src/img/200628-01.png)
 
 
 
