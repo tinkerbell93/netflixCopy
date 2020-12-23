@@ -1,40 +1,106 @@
-.header{
-  width: 90vw;
+header {
+  width: 100%;
   height: 70px;
   margin: 0 auto;
   display: flex;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-left: 50px;
+  background-color: transparent;
+  transition: background-color .5s;
+  z-index: 1000;
 }
-.logo{
+.logo {
   font-size: 0;
-  img{
+  img {
     width: 100px;
   }
   margin-right: 20px;
 }
-.logo::before{
+.logo::before {
   content: '';
   width: 100px;
 }
-
-.navigation-list{
+.navigation-list {
   display: flex;
   vertical-align: center;
-  li{
+  li {
     margin-left: 20px;
   }
+  li:hover {
+    opacity: 0.7;
+  }
 }
-.searchForm{
-  display: flex;
-  align-items: center;
-  margin-left: auto;
-  #contentSearch{
-    height: 34px;
-    width: 250px;
-    display: block;
-    border: 1px solid white;
-    background: rgba(20, 20, 20, 0.8);
-    border-radius: 0;
-    padding-left: 10px;
+.reset-btn {
+  border: 0;
+  background-color: transparent;
+}
+.search-form-container {
+  width: 350px;
+  height: 50px;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  &.active {
+    .icon-search {
+      transform: translate(-280px, -50%);
+      transition: all .4s;
+    }
+    .search-form {
+      width: 100%;
+      transition: all .3s;
+      .search-box {
+        #content-search {
+          padding-left: 40px;
+          border: 1px solid white;
+          opacity: 1;
+          transition: border .5s;
+          transition: opacity .5s;
+        }
+      }
+    }
+  }
+  .icon-search {
+    color: white;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    z-index: 10;
+  }
+  .search-form {
+    width: 20px;
+    align-items: center;
+    margin-left: auto;
+    position: absolute;
+    right: 10px;
+    .search-box {
+      padding: 10px 20px 10px 10px;
+      #content-search {
+        color: white;
+        font-size: 1.1rem;
+        height: 34px;
+        width: 100%;
+        display: block;
+        background: rgba(20, 20, 20, 0.8);
+        border-radius: 0;
+        border: 0;
+        padding: 0;
+        opacity: 0;
+      }
+      // #content-search::-webkit-search-cancel-button {
+      //   -webkit-appearance: none;
+      //   height: 10px;
+      //   width: 10px;
+      // color: #000;
+      // background-image: url(" ### Inline SVG of Choice ### ");
+      // }
+    }
   }
 }
